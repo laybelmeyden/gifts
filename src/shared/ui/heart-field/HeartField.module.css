@@ -1,0 +1,69 @@
+.portrait {
+  display: grid;
+  place-items: center;
+  height: 92px;
+  margin-bottom: 8px;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(167, 139, 250, 0.35), transparent 55%),
+    #1a0b2e;
+  border: 4px solid #3b2066;
+}
+
+.field {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.field span {
+  --c: #c084fc;
+  --s: 1;
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  image-rendering: pixelated;
+  box-shadow:
+    2px 0 var(--c), 4px 0 var(--c), 8px 0 var(--c), 10px 0 var(--c),
+    0 2px var(--c), 2px 2px var(--c), 4px 2px var(--c), 6px 2px var(--c), 8px 2px var(--c), 10px 2px var(--c), 12px 2px var(--c),
+    0 4px var(--c), 2px 4px var(--c), 4px 4px var(--c), 6px 4px var(--c), 8px 4px var(--c), 10px 4px var(--c), 12px 4px var(--c),
+    2px 6px var(--c), 4px 6px var(--c), 6px 6px var(--c), 8px 6px var(--c), 10px 6px var(--c),
+    4px 8px var(--c), 6px 8px var(--c), 8px 8px var(--c),
+    6px 10px var(--c);
+  filter: drop-shadow(0 0 3px var(--c));
+  transform: scale(var(--s));
+  transform-origin: top left;
+  animation: heart-float 2.6s ease-in-out infinite;
+}
+
+.field span:nth-child(1)  { left: 8%;  top: 22%; --s: 1.1;  --c: #c084fc; animation-delay: 0s; }
+.field span:nth-child(2)  { left: 22%; top: 58%; --s: 0.75; --c: #a855f7; animation-delay: 0.3s; }
+.field span:nth-child(3)  { left: 34%; top: 18%; --s: 1.35; --c: #e9d5ff; animation-delay: 0.7s; }
+.field span:nth-child(4)  { left: 46%; top: 42%; --s: 1;    --c: #c084fc; animation-delay: 0.15s; }
+.field span:nth-child(5)  { left: 58%; top: 14%; --s: 0.8;  --c: #7c3aed; animation-delay: 1.1s; }
+.field span:nth-child(6)  { left: 70%; top: 50%; --s: 1.2;  --c: #d8b4fe; animation-delay: 0.45s; }
+.field span:nth-child(7)  { left: 82%; top: 24%; --s: 0.9;  --c: #a855f7; animation-delay: 0.9s; }
+.field span:nth-child(8)  { left: 14%; top: 8%;  --s: 0.7;  --c: #7c3aed; animation-delay: 1.4s; }
+.field span:nth-child(9)  { left: 28%; top: 38%; --s: 0.85; --c: #c084fc; animation-delay: 0.2s; }
+.field span:nth-child(10) { left: 40%; top: 68%; --s: 1.15; --c: #a855f7; animation-delay: 0.6s; }
+.field span:nth-child(11) { left: 54%; top: 62%; --s: 0.7;  --c: #e9d5ff; animation-delay: 1.2s; }
+.field span:nth-child(12) { left: 66%; top: 30%; --s: 0.95; --c: #c084fc; animation-delay: 0.35s; }
+.field span:nth-child(13) { left: 78%; top: 66%; --s: 1.05; --c: #7c3aed; animation-delay: 0.85s; }
+.field span:nth-child(14) { left: 6%;  top: 64%; --s: 0.8;  --c: #d8b4fe; animation-delay: 1.5s; }
+.field span:nth-child(15) { left: 88%; top: 48%; --s: 0.65; --c: #c084fc; animation-delay: 0.05s; }
+.field span:nth-child(16) { left: 48%; top: 8%;  --s: 0.75; --c: #a855f7; animation-delay: 1.05s; }
+.field span:nth-child(17) { left: 18%; top: 78%; --s: 0.6;  --c: #7c3aed; animation-delay: 0.55s; }
+.field span:nth-child(18) { left: 62%; top: 78%; --s: 0.7;  --c: #c084fc; animation-delay: 1.3s; }
+.field span:nth-child(19) { left: 86%; top: 8%;  --s: 0.85; --c: #e9d5ff; animation-delay: 0.4s; }
+.field span:nth-child(20) { left: 36%; top: 86%; --s: 0.55; --c: #a855f7; animation-delay: 0.95s; }
+
+@keyframes heart-float {
+  0%,
+  100% {
+    transform: translateY(6px) scale(var(--s));
+  }
+  50% {
+    transform: translateY(-14px) scale(var(--s));
+  }
+}

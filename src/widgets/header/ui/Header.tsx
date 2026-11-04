@@ -1,6 +1,7 @@
 'use client';
 
 import { useSession } from '@entities/session';
+import { SignOutButton } from '@features/auth';
 import { routes } from '@shared/config';
 import { ButtonLink } from '@shared/ui';
 import styles from './Header.module.css';
@@ -23,6 +24,7 @@ export function Header() {
           <ButtonLink variant="link" href={routes.myList}>
             Мой список
           </ButtonLink>
+          <SignOutButton />
         </>
       ) : (
         <ButtonLink variant="link" href={routes.signIn}>
