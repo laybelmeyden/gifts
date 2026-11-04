@@ -1,0 +1,34 @@
+.page {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 100vh;
+  padding: 14px 28px 28px;
+}
+
+.main {
+  grid-template-rows: auto 1fr;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.auth {
+  grid-template-rows: 1fr;
+}
+
+.authScreen {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: calc(100vh - 56px);
+}
+
+@media (max-width: 980px) {
+  .page {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}

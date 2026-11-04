@@ -1,0 +1,12 @@
+.card {
+  width: min(380px, 100%);
+  padding: 22px 20px 20px;
+  text-align: center;
+}
+
+.title {
+  margin: 0 0 30px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.35;
+}

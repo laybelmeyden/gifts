@@ -1,0 +1,7 @@
+.panel {
+  background: rgba(8, 4, 16, 0.88);
+  border: 4px solid #efe7ff;
+  box-shadow:
+    0 0 0 4px #1b1028,
+    0 0 40px rgba(122, 61, 255, 0.25);
+}

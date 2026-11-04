@@ -1,0 +1,30 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  padding: 0;
+  border: 0;
+  background: rgba(5, 2, 8, 0.72);
+  cursor: pointer;
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+  width: min(380px, 100%);
+  min-width: 0;
+  max-width: 100%;
+  max-height: calc(100vh - 48px);
+  padding: 22px 20px 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: center;
+}
