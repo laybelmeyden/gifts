@@ -1,43 +1,74 @@
 .btn {
-  display: inline-block;
-  padding: 12px 10px;
-  border-radius: 0;
+  --btn-fill: var(--accent);
+  --btn-line: var(--lavender);
+  position: relative;
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 4px 24px 0;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--btn-fill), var(--btn-fill)) padding-box,
+    linear-gradient(var(--btn-line), var(--btn-line)) border-box;
+  clip-path: polygon(
+    4px 0,
+    calc(100% - 4px) 0,
+    100% 4px,
+    100% calc(100% - 4px),
+    calc(100% - 4px) 100%,
+    4px 100%,
+    0 calc(100% - 4px),
+    0 4px
+  );
+  color: var(--ink);
   font-family: inherit;
-  font-weight: 400;
   font-size: 16px;
-  line-height: 1.3;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
   text-align: center;
   text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
   cursor: pointer;
 }
 
-.primary {
-  border: 3px solid #e9d5ff;
-  background: var(--accent);
+.secondary {
+  --btn-fill: var(--bg);
+  --btn-line: var(--lavender);
+}
+
+.pink {
+  --btn-fill: var(--pink);
+  --btn-line: var(--pink-border);
   color: #fff;
 }
 
-.ghost {
-  border: 3px solid #efe7ff;
-  background: transparent;
-  color: var(--ink);
-}
-
-.primary:hover,
-.ghost:hover {
-  background: var(--accent-hover);
-  color: #fff;
-}
-
+.ghost,
 .link {
+  height: auto;
   padding: 0;
-  border: 0;
+  border-color: transparent;
   background: transparent;
-  color: var(--muted);
+  clip-path: none;
+  color: var(--lilac);
+  font-size: 16px;
 }
 
-.link:hover {
-  color: #fff;
+.btn:hover:not(:disabled) {
+  opacity: 0.5;
+}
+
+.sm {
+  height: 36px;
+  padding: 3px 14px 0;
+  font-size: 14px;
+}
+
+.block {
+  width: 100%;
 }
 
 .btn:disabled {
@@ -45,17 +76,51 @@
   cursor: wait;
 }
 
-.fixed {
-  flex: 0 0 135px;
-  width: 135px;
-  min-width: 135px;
-  max-height: 50px;
+.loading:disabled {
+  padding-block: 0;
+  opacity: 1;
 }
 
-.block {
-  width: 100%;
+.stage {
+  display: grid;
+  place-items: center;
+  height: 32px;
+  overflow: hidden;
 }
 
-.link.block {
-  padding: 12px 10px 0;
+.heart {
+  width: 24px;
+  aspect-ratio: 78 / 66;
+  background: url('/hero/heart-pink.png') center / 100% 100% no-repeat;
+  image-rendering: pixelated;
+  animation: buttonHeart 0.8s ease-in-out infinite;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes buttonHeart {
+  0%,
+  100% {
+    transform: translateY(-3px);
+  }
+
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heart {
+    animation: none;
+  }
 }

@@ -1,0 +1,36 @@
+.box {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: min(380px, 100%);
+  --px-fill: var(--bg);
+  --px-line: var(--lavender);
+  min-height: 80px;
+  margin: 0;
+  padding: 14px 16px;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  letter-spacing: 0;
+  text-align: left;
+  text-transform: none;
+  cursor: pointer;
+}
+
+.heart {
+  flex: 0 0 22px;
+  width: 22px;
+  height: 20px;
+}
+
+.more {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.box span:nth-child(2) {
+  flex: 1;
+}

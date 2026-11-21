@@ -1,31 +1,53 @@
-import { Panel, PixelHeart } from '@shared/ui';
-import { HomeEnterButton } from './HomeEnterButton';
+import { routes } from '@shared/config';
+import { ButtonLink, Logo } from '@shared/ui';
+import { HeroScene } from '@widgets/hero-scene';
 import styles from './HomePage.module.css';
 
 export function HomePage() {
   return (
-    <main className={styles.page}>
-      <section className={styles.stage}>
-        <div className={styles.hero}>
-          <p className="kicker">Лучший подарок — ты сам</p>
-          <h1 className={styles.title}>
-            список
-            <br />
-            подарков
-            <br />
-            <span>твоей мечты</span>
-          </h1>
-          <HomeEnterButton className={styles.enter} />
-          <p className="lead">Войдите, чтобы создать список подарков своей мечты.</p>
-          <Panel className={styles.lore}>
-            <div>
-              <h2>Настоящие списки. Настоящие истории.</h2>
-              <p>Никакого шума. Только вход, ваши задачи и фиолетовое небо.</p>
-            </div>
-            <PixelHeart className={styles.loreHeart} />
-          </Panel>
+    <div className={`${styles.page} starfield`}>
+      <header className={styles.bar}>
+        <Logo />
+        <div className={styles.barActions}>
+          <ButtonLink variant="secondary" size="sm" href={routes.signIn}>
+            Войти
+          </ButtonLink>
+          <ButtonLink className={styles.barCreate} size="sm" href={routes.signUp}>
+            Создать вишлист
+          </ButtonLink>
         </div>
-      </section>
-    </main>
+      </header>
+      <div className={styles.grid}>
+        <div className={styles.stack}>
+          <div className={styles.copy}>
+            <p className={styles.eyebrow}>
+              <span className={styles.desk}>Вишлист для своих</span>
+              <span className={styles.mob}>Вишлист без намёков</span>
+              <span className={`${styles.spark} ${styles.desk}`} aria-hidden="true" />
+            </p>
+            <h1>
+              Список подарков
+              <br />
+              <span>твоей мечты</span>
+            </h1>
+            <p className={styles.lead}>
+              <span className={styles.desk}>
+                Собери все желания в одном месте, отправь ссылку подругам - и получай только то, о чём давно мечтаешь.
+              </span>
+              <span className={styles.mob}>
+                Собери желания в один список, отправь ссылку - и получай только то, о чём мечтаешь.
+              </span>
+            </p>
+          </div>
+          <div className={styles.ctas}>
+            <ButtonLink href={routes.signUp}>Создать вишлист</ButtonLink>
+            <ButtonLink className={styles.ctaLogin} variant="secondary" href={routes.signIn}>
+              Войти
+            </ButtonLink>
+          </div>
+        </div>
+        <HeroScene quote className={styles.hero} />
+      </div>
+    </div>
   );
 }

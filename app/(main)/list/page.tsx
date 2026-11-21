@@ -1,10 +1,10 @@
-import { BoardPage } from '@pages/board';
+import { EmptyLists } from '@pages/my-lists';
 import { requireUser } from '@server/auth';
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = { title: 'мой список' };
+export const metadata: Metadata = { title: 'мои вишлисты' };
 
 export default async function MyListRoute() {
-  await requireUser();
-  return <BoardPage />;
+  const user = await requireUser();
+  return <EmptyLists name={user.name} />;
 }

@@ -2,7 +2,7 @@ import type { z } from 'zod';
 
 export type FieldErrors = Partial<Record<string, string>>;
 
-/** Первая ошибка по каждому полю — для подписи под инпутом. */
+/** Первая ошибка по каждому полю - для подписи под инпутом. */
 export function fieldErrors(error: z.ZodError): FieldErrors {
   const result: FieldErrors = {};
   for (const issue of error.issues) {

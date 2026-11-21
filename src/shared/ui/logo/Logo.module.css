@@ -1,0 +1,22 @@
+.logo {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  color: var(--ink);
+  font-family: var(--font-pixel), 'Comic Sans MS', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.logo:hover {
+  opacity: 0.5;
+}
+
+.heart {
+  width: 22px;
+  height: 20px;
+  image-rendering: pixelated;
+}

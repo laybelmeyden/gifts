@@ -26,7 +26,7 @@ export function SignOutButton() {
   }
 
   return (
-    <Button variant="link" onClick={handleClick} disabled={pending}>
+    <Button variant="link" onClick={handleClick} loading={pending}>
       Выйти
     </Button>
   );

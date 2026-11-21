@@ -1,11 +1,17 @@
 :root {
-  --bg: #050208;
-  --card: #12081c;
-  --ink: #f5f0ff;
-  --muted: #b7a4d8;
-  --line: #6d4aff;
-  --accent: #7a3dff;
+  --bg: #07040d;
+  --raised: #0e0819;
+  --card: #140c24;
+  --ink: #f6f1ff;
+  --muted: #a99ccb;
+  --faint: #6f628f;
+  --line: #4a3775;
+  --lavender: #e6dcff;
+  --lilac: #b9a3ff;
+  --accent: #7c4dff;
   --accent-hover: #9b6cff;
+  --pink: #ff4d9a;
+  --pink-border: #ffd0ea;
   --ok: #b794f6;
   --err: #ff6b9d;
 }
@@ -35,10 +41,18 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-pixel), 'Comic Sans MS', sans-serif;
+  font-size: 16px;
   font-weight: 400;
+  line-height: 1.45;
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: unset;
-  font-smooth: never;
+}
+
+h1,
+h2,
+.display {
+  font-family: var(--font-pixel), 'Comic Sans MS', sans-serif;
+  font-weight: 400;
 }
 
 button,
@@ -53,6 +67,15 @@ input {
   pointer-events: none;
 }
 
+.starfield {
+  background-color: var(--bg);
+  background-image: url('/auth/stars.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
 .stars {
   z-index: 0;
   background-image:
@@ -65,8 +88,35 @@ input {
 }
 
 .scanlines {
-  z-index: 8;
-  background: repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.18) 0 2px, transparent 2px 4px);
+  display: none;
+}
+
+/* Рамка со срезанным пиксельным углом: обводка идёт по ступеньке, а не прямоугольником. */
+.px {
+  --px-fill: transparent;
+  --px-line: var(--line);
+  position: relative;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--px-fill), var(--px-fill)) padding-box,
+    linear-gradient(var(--px-line), var(--px-line)) border-box;
+  clip-path: polygon(
+    4px 0,
+    calc(100% - 4px) 0,
+    100% 4px,
+    100% calc(100% - 4px),
+    calc(100% - 4px) 100%,
+    4px 100%,
+    0 calc(100% - 4px),
+    0 4px
+  );
+}
+
+.center-screen {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
 }
 
 .kicker {

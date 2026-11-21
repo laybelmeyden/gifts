@@ -13,15 +13,22 @@ export const emailSchema = z
 
 export const passwordSchema = z
   .string()
-  .min(PASSWORD_MIN, `Пароль — минимум ${PASSWORD_MIN} символов.`)
-  .max(PASSWORD_MAX, `Пароль — максимум ${PASSWORD_MAX} символов.`);
+  .min(PASSWORD_MIN, `Пароль - минимум ${PASSWORD_MIN} символов.`)
+  .max(PASSWORD_MAX, `Пароль - максимум ${PASSWORD_MAX} символов.`);
 
 export const signInSchema = z.object({
   email: emailSchema,
   password: z.string().min(1, 'Введите пароль.'),
 });
 
+export const nameSchema = z
+  .string()
+  .trim()
+  .min(1, 'Как тебя зовут?')
+  .max(40, 'Имя - максимум 40 символов.');
+
 export const signUpSchema = z.object({
+  name: nameSchema,
   email: emailSchema,
   password: passwordSchema,
 });

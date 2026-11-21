@@ -1,8 +1,17 @@
 .board {
   display: grid;
-  grid-template-rows: auto 1fr;
-  width: 100%;
-  min-height: 0;
+  grid-template-rows: auto auto 1fr;
+  width: min(1200px, 100%);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 14px 28px 28px;
+}
+
+@media (max-width: 800px) {
+  .board {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
 }
 
 .head {

@@ -3,7 +3,7 @@ import { defineConfig } from 'drizzle-kit';
 
 loadEnvConfig(process.cwd());
 
-// Миграции — по прямому подключению, мимо пулера pgbouncer.
+// Миграции - по прямому подключению, мимо пулера pgbouncer.
 const url = process.env.DATABASE_URL_UNPOOLED ?? process.env.DATABASE_URL;
 if (!url) throw new Error('Нет DATABASE_URL_UNPOOLED или DATABASE_URL в .env.local');
 

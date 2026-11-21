@@ -2,7 +2,7 @@ import { bigint, boolean, index, integer, pgEnum, pgTable, text, timestamp } fro
 import { USER_ROLES } from '../../../contracts/user';
 
 // Таблицы Better Auth. Ключи полей (camelCase) должны совпадать с моделью Better Auth,
-// имена колонок в базе — snake_case.
+// имена колонок в базе - snake_case.
 
 export const userRole = pgEnum('user_role', USER_ROLES);
 

@@ -1,0 +1,177 @@
+.scene {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.stage {
+  position: relative;
+  width: min(100%, 500px);
+  aspect-ratio: 500 / 600;
+}
+
+.compact .stage {
+  width: min(100%, 360px);
+}
+
+.beam,
+.beamDim,
+.glow,
+.aura,
+.heart,
+.gift,
+.floatHeart,
+.star {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+
+.beam,
+.beamDim {
+  top: 12%;
+  left: 50%;
+  width: 78%;
+  aspect-ratio: 242 / 301;
+  transform: translateX(-50%);
+  mask-image: linear-gradient(to bottom, transparent, #000 48px);
+}
+
+.beamDim {
+  background-image: url('/hero/beam-dim.png');
+}
+
+.beam {
+  background-image: url('/hero/beam.png');
+  animation: beam 2.6s ease-in-out infinite;
+}
+
+.floor {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 10%;
+  overflow: hidden;
+}
+
+.glow {
+  bottom: -64%;
+  left: 50%;
+  width: 92%;
+  aspect-ratio: 280 / 120;
+  background-image: url('/hero/glow.png');
+  transform: translateX(-50%);
+}
+
+.gift {
+  bottom: 10%;
+  left: 50%;
+  z-index: 1;
+  width: calc(213 / 500 * 100%);
+  aspect-ratio: 213 / 186;
+  background-image: url('/hero/gift.png');
+  image-rendering: pixelated;
+  transform: translateX(-50%);
+}
+
+.aura {
+  top: -6%;
+  left: 50%;
+  width: 48%;
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgb(190 160 255 / 50%) 0%, rgb(140 90 255 / 18%) 34%, transparent 62%);
+  filter: blur(12px);
+  animation: heart 2.6s ease-in-out infinite;
+}
+
+.heart {
+  top: 4.2%;
+  left: 50%;
+  width: calc(130 / 500 * 100%);
+  aspect-ratio: 130 / 110;
+  background-image: url('/hero/heart.png');
+  image-rendering: pixelated;
+  animation: heart 2.6s ease-in-out infinite;
+}
+
+.floatHeart {
+  image-rendering: pixelated;
+  animation: opposite 2.6s ease-in-out infinite;
+}
+
+.pink {
+  width: calc(26 / 500 * 100%);
+  aspect-ratio: 1;
+  background-image: url('/hero/heart-pink.png');
+}
+
+.lilac {
+  width: calc(20 / 500 * 100%);
+  aspect-ratio: 1;
+  background-image: url('/hero/heart-lilac.png');
+}
+
+.star {
+  width: calc(35 / 500 * 100%);
+  aspect-ratio: 1;
+  background-image: url('/hero/sparkle.png');
+  image-rendering: pixelated;
+  animation: blink 1.8s ease-in-out infinite;
+}
+
+@keyframes heart {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(22px);
+  }
+}
+
+@keyframes beam {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes opposite {
+  0%,
+  100% {
+    translate: 0 7px;
+    opacity: 1;
+  }
+  50% {
+    translate: 0 -7px;
+    opacity: 0.35;
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  45%,
+  55% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .beam,
+  .aura,
+  .heart,
+  .floatHeart,
+  .star {
+    animation: none;
+  }
+}

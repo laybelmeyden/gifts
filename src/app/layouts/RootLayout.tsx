@@ -8,13 +8,13 @@ import '../styles/globals.css';
 export const rootMetadata: Metadata = {
   title: {
     default: 'Gifts',
-    template: 'Gifts — %s',
+    template: 'Gifts - %s',
   },
   description: 'Список подарков твоей мечты',
 };
 
 export const rootViewport: Viewport = {
-  themeColor: '#050208',
+  themeColor: '#07040d',
 };
 
 type RootLayoutProps = {
@@ -27,7 +27,6 @@ export function RootLayout({ user, children }: RootLayoutProps) {
     <html lang="ru" className={pixelFont.variable}>
       <body>
         <div className="stars" aria-hidden="true" />
-        <div className="scanlines" aria-hidden="true" />
         <AppProviders user={user}>{children}</AppProviders>
       </body>
     </html>

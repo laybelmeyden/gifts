@@ -1,7 +1,8 @@
+import { Header } from '@widgets/header';
 import styles from './BoardPage.module.css';
 
 type BoardPageProps = {
-  /** Чужой список по ссылке /u/:userId; без него — свой список. */
+  /** Чужой список по ссылке /u/:userId; без него - свой список. */
   userId?: string;
 };
 
@@ -10,6 +11,7 @@ export function BoardPage({ userId }: BoardPageProps) {
 
   return (
     <section className={styles.board}>
+      <Header />
       <header className={styles.head}>
         <h1 className={styles.title}>{isOwn ? 'Ваш список подарков' : 'Список подарков'}</h1>
       </header>

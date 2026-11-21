@@ -28,7 +28,7 @@ function fsdPatterns(layer) {
   if (slicedLayers.includes(layer)) {
     patterns.push({
       group: [`@${layer}/*`],
-      message: 'Слайсы одного слоя не импортируют друг друга. Внутри своего слайса — относительные пути.',
+      message: 'Слайсы одного слоя не импортируют друг друга. Внутри своего слайса - относительные пути.',
     });
   }
   if (lower.length > 0) {
@@ -91,7 +91,7 @@ export default defineConfig([
           patterns: [
             {
               group: [...allLayerAliases, '**/src/*', '@server', '@server/*', '**/server/*'],
-              message: 'Контракты — общий нижний уровень: ни фронтенд, ни сервер сюда не импортируются.',
+              message: 'Контракты - общий нижний уровень: ни фронтенд, ни сервер сюда не импортируются.',
             },
           ],
         },

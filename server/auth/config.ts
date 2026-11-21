@@ -7,7 +7,7 @@ import { USER_ROLES } from '../../contracts/user';
 import { db } from '../db';
 import * as schema from '../db/schema';
 
-// Прод — BETTER_AUTH_URL; превью-деплои Vercel — их собственный адрес; локально — localhost.
+// Прод - BETTER_AUTH_URL; превью-деплои Vercel - их собственный адрес; локально - localhost.
 function resolveBaseUrl(): string {
   if (process.env.BETTER_AUTH_URL) return process.env.BETTER_AUTH_URL;
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
