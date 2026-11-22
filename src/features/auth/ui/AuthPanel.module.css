@@ -98,8 +98,6 @@
 }
 
 .tab {
-  --px-fill: var(--bg);
-  --px-line: var(--lavender);
   display: grid;
   place-items: center;
   height: 36px;
@@ -112,9 +110,17 @@
   text-transform: uppercase;
 }
 
-.tabOn {
+:global(.px).tab {
+  --px-fill: var(--bg);
+  --px-line: var(--lavender);
+}
+
+:global(.px).tabOn {
   --px-fill: var(--accent);
   --px-line: var(--lavender);
+}
+
+.tabOn {
   color: var(--ink);
 }
 
