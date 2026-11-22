@@ -10,3 +10,9 @@ export function giftStatus(viewerId: string | null): SQL {
     else 'free'
   end`;
 }
+
+/** Бронь для хозяина: имя дарящего прячется, если тот выбрал «Анонимно». Те же алиасы `g` и `r`. */
+export const ownerBooking = sql`case
+  when r."gift_id" is null then null
+  else json_build_object('name', case when r."anonymous" then null else r."name" end)
+end`;

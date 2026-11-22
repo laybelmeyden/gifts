@@ -1,10 +1,10 @@
 import 'server-only';
 import { sql } from 'drizzle-orm';
-import type { WishlistGift } from '../../contracts/gift';
+import type { OwnerGift } from '../../contracts/gift';
 import type { SharedGift, SharedWishlist } from '../../contracts/reservation';
 import type { WishlistDetail } from '../../contracts/wishlist';
 import { db } from '../db';
-import { giftStatus } from '../reservations/gift-status';
+import { giftStatus, ownerBooking } from '../reservations/gift-status';
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
@@ -44,9 +44,10 @@ export async function getWishlist(ownerId: string, wishlistId: string): Promise<
   const list = lists.rows[0];
   if (!list) return null;
 
-  const gifts = await db.execute<WishlistGift>(sql`
-    select ${giftColumns}
+  const gifts = await db.execute<OwnerGift>(sql`
+    select ${giftColumns}, ${ownerBooking} as "booking"
     from "gifts" g
+    left join "reservations" r on r."gift_id" = g."id"
     where g."wishlist_id" = ${wishlistId}
     order by g."created_at" desc
   `);

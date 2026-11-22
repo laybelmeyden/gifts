@@ -1,9 +1,9 @@
 import 'server-only';
 import { sql } from 'drizzle-orm';
-import type { GiftDetail } from '../../contracts/gift';
+import type { OwnerGiftDetail } from '../../contracts/gift';
 import type { SharedGiftDetail } from '../../contracts/reservation';
 import { db } from '../db';
-import { giftStatus } from '../reservations/gift-status';
+import { giftStatus, ownerBooking } from '../reservations/gift-status';
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
@@ -22,13 +22,14 @@ const columns = sql`
   w."title" as "wishlistTitle"
 `;
 
-export async function getGift(ownerId: string, wishlistId: string, giftId: string): Promise<GiftDetail | null> {
+export async function getGift(ownerId: string, wishlistId: string, giftId: string): Promise<OwnerGiftDetail | null> {
   if (!UUID.test(wishlistId) || !UUID.test(giftId)) return null;
 
-  const result = await db.execute<GiftDetail>(sql`
-    select ${columns}
+  const result = await db.execute<OwnerGiftDetail>(sql`
+    select ${columns}, ${ownerBooking} as "booking"
     from "gifts" g
     join "wishlists" w on w."id" = g."wishlist_id"
+    left join "reservations" r on r."gift_id" = g."id"
     where g."id" = ${giftId} and w."id" = ${wishlistId} and w."owner_id" = ${ownerId}
   `);
   return result.rows[0] ?? null;

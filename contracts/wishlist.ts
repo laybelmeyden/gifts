@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import type { WishlistGift } from './gift';
+import type { OwnerGift } from './gift';
 import { t } from './i18n';
 
 export const WISHLIST_OCCASIONS = ['birthday', 'newyear', 'march8', 'wedding', 'just'] as const;
@@ -52,7 +52,6 @@ export type WishlistSummary = {
 
 export type WishlistDetail = Omit<WishlistSummary, 'giftCount'> & {
   visibility: WishlistVisibility;
-  /** Хозяину видно только число броней, без подарков и имён. */
   bookedCount: number;
-  gifts: WishlistGift[];
+  gifts: OwnerGift[];
 };

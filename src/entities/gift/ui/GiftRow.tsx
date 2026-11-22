@@ -1,17 +1,19 @@
-import { GIFT_DESIRES, type WishlistGift } from '@contracts/gift';
+import { GIFT_DESIRES, type OwnerGift } from '@contracts/gift';
 import { t } from '@contracts/i18n';
 import { cx } from '@shared/lib';
 import Link from 'next/link';
+import { bookingLabel } from '../lib/booking-label';
 import { formatPrice } from '../lib/format-price';
 import { shopName } from '../lib/shop-name';
 import styles from './GiftRow.module.css';
 
-export function GiftRow({ gift, href }: { gift: WishlistGift; href: string }) {
+export function GiftRow({ gift, href }: { gift: OwnerGift; href: string }) {
   const shop = shopName(gift.productUrl);
   const level = GIFT_DESIRES.indexOf(gift.desire) + 1;
+  const booked = !gift.received && !!gift.booking;
 
   return (
-    <Link className={cx('px', styles.row, gift.received && styles.received)} href={href}>
+    <Link className={cx('px', styles.row, gift.received && styles.received, booked && styles.booked)} href={href}>
       <span className={styles.body}>
         <span className={cx('px', styles.thumb)}>
           {gift.imageUrl ? (
@@ -37,6 +39,12 @@ export function GiftRow({ gift, href }: { gift: WishlistGift; href: string }) {
         </span>
       </span>
       {gift.received && <span className={styles.badge}>{t.gift.received}</span>}
+      {booked && gift.booking && (
+        <span className={cx(styles.badge, styles.bookedBadge)}>
+          <span className={styles.bookedHeart} aria-hidden="true" />
+          {bookingLabel(gift.booking)}
+        </span>
+      )}
     </Link>
   );
 }

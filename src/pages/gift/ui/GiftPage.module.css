@@ -156,6 +156,23 @@
   color: #8ce0b8;
 }
 
+.bookedTag {
+  border-color: #6b2a4c;
+  background: #3a1630;
+  color: #ffb3d4;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.bookedHeart {
+  width: 10px;
+  height: 9px;
+  margin-top: -2px;
+  background-color: var(--pink);
+  mask: url('/hero/heart.png') center / contain no-repeat;
+  -webkit-mask: url('/hero/heart.png') center / contain no-repeat;
+}
+
 .hearts {
   display: flex;
   gap: 1px;

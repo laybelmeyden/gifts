@@ -79,3 +79,10 @@ export type GiftDetail = WishlistGift & {
   wishlistTitle: string;
   comment: string | null;
 };
+
+/** Бронь, которую видит хозяин: `name` = null, если дарящий выбрал «Анонимно». */
+export type GiftBooking = { name: string | null };
+
+export type OwnerGift = WishlistGift & { booking: GiftBooking | null };
+
+export type OwnerGiftDetail = GiftDetail & { booking: GiftBooking | null };

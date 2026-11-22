@@ -1,9 +1,9 @@
 'use client';
 
 import type { ManagedUser } from '@contracts/admin';
-import { GIFT_DESIRES, type GiftDetail } from '@contracts/gift';
+import { GIFT_DESIRES, type OwnerGiftDetail } from '@contracts/gift';
 import { t } from '@contracts/i18n';
-import { formatPrice, shopName } from '@entities/gift';
+import { bookingLabel, formatPrice, shopName } from '@entities/gift';
 import { ADD_GIFT_MODAL, AddGiftModal } from '@features/add-gift';
 import { ChangePhotoButton, DeleteGift, ReceivedButton } from '@features/manage-gift';
 import { routes } from '@shared/config';
@@ -15,7 +15,7 @@ import styles from './GiftPage.module.css';
 const text = t.gift;
 
 type GiftPageProps = {
-  gift: GiftDetail;
+  gift: OwnerGiftDetail;
   /** Админ открыл подарок пользователя из админки: все кнопки работают от имени хозяина. */
   managedUser?: ManagedUser;
 };
@@ -62,6 +62,12 @@ export function GiftPage({ gift, managedUser }: GiftPageProps) {
               {t.addGift.desires[gift.desire]}
             </span>
             {gift.received && <span className={cx(styles.tag, styles.receivedTag)}>{text.received}</span>}
+            {!gift.received && gift.booking && (
+              <span className={cx(styles.tag, styles.bookedTag)}>
+                <span className={styles.bookedHeart} aria-hidden="true" />
+                {bookingLabel(gift.booking)}
+              </span>
+            )}
           </div>
 
           <h1 className={styles.title}>{gift.title}</h1>
