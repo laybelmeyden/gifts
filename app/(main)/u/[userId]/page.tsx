@@ -1,7 +1,8 @@
+import { t } from '@contracts/i18n';
 import { BoardPage } from '@pages/board';
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = { title: 'список подарков' };
+export const metadata: Metadata = { title: t.meta.titles.board };
 
 type UserListRouteProps = {
   params: Promise<{ userId: string }>;

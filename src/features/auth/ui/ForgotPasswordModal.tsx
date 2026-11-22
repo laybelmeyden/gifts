@@ -1,6 +1,7 @@
 'use client';
 
 import { emailSchema } from '@contracts/auth';
+import { t } from '@contracts/i18n';
 import { Button, Input, Modal, useModal, useToast } from '@shared/ui';
 import { useState, type FormEvent } from 'react';
 import styles from './ForgotPasswordModal.module.css';
@@ -9,7 +10,7 @@ export const FORGOT_PASSWORD_MODAL = 'forgot-password';
 
 export function ForgotPasswordModal() {
   return (
-    <Modal name={FORGOT_PASSWORD_MODAL} title="Забыли пароль?">
+    <Modal name={FORGOT_PASSWORD_MODAL} title={t.auth.forgot.title}>
       <ForgotPasswordForm />
     </Modal>
   );
@@ -28,26 +29,26 @@ function ForgotPasswordForm() {
       return;
     }
     closeModal();
-    showToast('Отправка писем появится следующим шагом.');
+    showToast(t.auth.forgot.soon);
   }
 
   return (
     <form className={styles.form} onSubmit={handleSubmit} noValidate>
-      <p className={styles.lead}>Пришлём ссылку для нового пароля на почту.</p>
+      <p className={styles.lead}>{t.auth.forgot.lead}</p>
       <Input
-        label="Почта"
+        label={t.fields.email}
         name="email"
         type="email"
         autoComplete="email"
         inputMode="email"
-        placeholder="example@mail.com"
+        placeholder={t.fields.emailPlaceholder}
         autoFocus
         required
         error={error}
       />
       <Button type="submit" block>
         <PlaneIcon />
-        Прислать ссылку
+        {t.auth.forgot.submit}
       </Button>
     </form>
   );

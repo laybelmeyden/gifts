@@ -1,3 +1,4 @@
+import { t } from '@contracts/i18n';
 import { routes } from '@shared/config';
 import { ButtonLink } from '@shared/ui';
 import styles from './RulesPage.module.css';
@@ -8,7 +9,7 @@ export function RulesPage() {
       <div className={styles.wrap}>
         <ButtonLink variant="link" href={routes.home} className={styles.back}>
           <span className={styles.arrow} aria-hidden="true" />
-          На главную
+          {t.common.toHome}
         </ButtonLink>
         <h1>Пользовательское соглашение сервиса «Gifts»</h1>
 

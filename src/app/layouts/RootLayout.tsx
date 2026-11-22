@@ -1,3 +1,4 @@
+import { t } from '@contracts/i18n';
 import type { SessionUser } from '@contracts/user';
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
@@ -10,7 +11,7 @@ export const rootMetadata: Metadata = {
     default: 'Gifts',
     template: 'Gifts - %s',
   },
-  description: 'Список подарков твоей мечты',
+  description: t.meta.description,
 };
 
 export const rootViewport: Viewport = {

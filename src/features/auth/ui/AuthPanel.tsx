@@ -1,6 +1,7 @@
 'use client';
 
 import { signInSchema, signUpSchema, type SignInInput, type SignUpInput } from '@contracts/auth';
+import { t } from '@contracts/i18n';
 import { authClient } from '@shared/api';
 import { routes } from '@shared/config';
 import { fieldErrors, type FieldErrors } from '@shared/lib';
@@ -15,17 +16,9 @@ import styles from './AuthPanel.module.css';
 type Mode = 'sign-in' | 'sign-up';
 
 const copy = {
-  'sign-in': {
-    title: 'С возвращением!',
-    subtitle: 'Твои списки желаний ждут тебя',
-    submit: 'Войти',
-  },
-  'sign-up': {
-    title: 'Создадим твой первый вишлист',
-    subtitle: 'Это бесплатно и займёт минуту',
-    submit: 'Создать аккаунт',
-  },
-} as const;
+  'sign-in': t.auth.signIn,
+  'sign-up': t.auth.signUp,
+};
 
 export function AuthPanel({ mode, art }: { mode: Mode; art: ReactNode }) {
   const text = copy[mode];
@@ -42,16 +35,16 @@ export function AuthPanel({ mode, art }: { mode: Mode; art: ReactNode }) {
         <div className={styles.formWrap}>
           <ButtonLink variant="link" href={routes.home} className={styles.back}>
             <span className={styles.arrow} aria-hidden="true" />
-            На главную
+            {t.common.toHome}
           </ButtonLink>
           <h1 className={styles.title}>{text.title}</h1>
           <p className={styles.subtitle}>{text.subtitle}</p>
           <div className={styles.tabs}>
             <Tab href={routes.signIn} active={!isSignUp}>
-              Вход
+              {t.auth.tabSignIn}
             </Tab>
             <Tab href={routes.signUp} active={isSignUp}>
-              Регистрация
+              {t.auth.tabSignUp}
             </Tab>
           </div>
           <AuthForm mode={mode} submitLabel={text.submit} />
@@ -113,35 +106,35 @@ function AuthForm({ mode, submitLabel }: { mode: Mode; submitLabel: string }) {
     <form className={styles.form} onSubmit={handleSubmit} noValidate>
       {isSignUp && (
         <Input
-          label="Как тебя зовут"
+          label={t.auth.nameLabel}
           name="name"
           autoComplete="nickname"
-          placeholder="Огафий-чан"
+          placeholder={t.auth.namePlaceholder}
           required
           error={errors.name}
         />
       )}
       <Input
-        label="Почта"
+        label={t.fields.email}
         name="email"
         type="email"
         autoComplete="email"
         inputMode="email"
-        placeholder="example@mail.com"
+        placeholder={t.fields.emailPlaceholder}
         required
         error={errors.email}
       />
       <PasswordInput
-        label="Пароль"
+        label={t.fields.password}
         name="password"
         autoComplete={isSignUp ? 'new-password' : 'current-password'}
-        placeholder="******"
+        placeholder={t.fields.passwordPlaceholder}
         required
         error={errors.password}
       />
       {!isSignUp && (
         <Button variant="link" className={styles.forgot} onClick={() => openModal(FORGOT_PASSWORD_MODAL)}>
-          Забыли пароль?
+          {t.auth.forgotPassword}
         </Button>
       )}
       {formError && (
@@ -154,11 +147,11 @@ function AuthForm({ mode, submitLabel }: { mode: Mode; submitLabel: string }) {
       </Button>
       {isSignUp && (
         <p className={styles.note}>
-          Нажимая «Создать аккаунт», ты соглашаешься с{' '}
+          {t.auth.termsBefore}
           <Link href={routes.rules} className={styles.rules}>
-            правилами сервиса
+            {t.auth.termsLink}
           </Link>
-          .
+          {t.auth.termsAfter}
         </p>
       )}
     </form>

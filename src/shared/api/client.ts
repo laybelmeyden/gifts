@@ -1,4 +1,5 @@
 import type { ApiErrorBody } from '@contracts/api';
+import { t } from '@contracts/i18n';
 import { API_BASE } from '../config';
 
 export class ApiError extends Error {
@@ -43,7 +44,7 @@ export async function apiFetch<T>(path: string, init: ApiRequestInit = {}): Prom
       body: json === undefined ? undefined : JSON.stringify(json),
     });
   } catch {
-    throw new ApiError(0, 'network', 'Нет сети или сервер недоступен.');
+    throw new ApiError(0, 'network', t.common.networkError);
   }
 
   if (response.status === 204) return undefined as T;
@@ -53,7 +54,7 @@ export async function apiFetch<T>(path: string, init: ApiRequestInit = {}): Prom
     if (isErrorBody(data)) {
       throw new ApiError(response.status, data.error.code, data.error.message, data.error.fields);
     }
-    throw new ApiError(response.status, 'unknown', 'Сервер ответил ошибкой. Попробуйте ещё раз.');
+    throw new ApiError(response.status, 'unknown', t.common.serverError);
   }
   return data as T;
 }

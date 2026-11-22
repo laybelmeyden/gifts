@@ -1,15 +1,11 @@
 'use client';
 
+import { t } from '@contracts/i18n';
 import { PixelHeart } from '@shared/ui';
 import { useEffect, useState } from 'react';
 import styles from './Dialogue.module.css';
 
-const lines = [
-  '* Ты достойна именно тех подарков, о которых мечтаешь.',
-  '* Подарок говорит то, что голос стесняется.',
-  '* Даже маленький сюрприз может отогреть целый день.',
-  '* Не цена делает подарок. Делает взгляд, с которым его отдают.',
-];
+const lines = t.home.quotes;
 
 export function Dialogue() {
   const [index, setIndex] = useState(0);

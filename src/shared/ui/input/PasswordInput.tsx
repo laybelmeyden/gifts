@@ -1,5 +1,6 @@
 'use client';
 
+import { t } from '@contracts/i18n';
 import { useState, type InputHTMLAttributes } from 'react';
 import { Input } from './Input';
 import styles from './PasswordInput.module.css';
@@ -20,7 +21,7 @@ export function PasswordInput({ ...rest }: PasswordInputProps) {
         <button
           className={styles.eye}
           type="button"
-          aria-label={shown ? 'Скрыть пароль' : 'Показать пароль'}
+          aria-label={shown ? t.fields.hidePassword : t.fields.showPassword}
           onClick={() => setShown((value) => !value)}
         >
           <Eye open={shown} />

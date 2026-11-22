@@ -1,3 +1,5 @@
+import { t } from '@contracts/i18n';
+
 const ru: Record<string, string> = {
   а: 'a',
   б: 'b',
@@ -48,5 +50,5 @@ export function nickFromName(name: string) {
 }
 
 export function formatHandleLevel(handle: string, level = 1) {
-  return `@${handle} · LV ${level}`;
+  return t.common.handleLevel(handle, level);
 }

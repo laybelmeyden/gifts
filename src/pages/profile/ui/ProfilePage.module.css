@@ -99,15 +99,19 @@
   border: 2px solid #2c2045;
   background: #07040d;
   color: var(--faint);
-  font-size: 14px;
-  line-height: 1;
+  font-family: var(--font-text), monospace;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 16px;
   text-transform: lowercase;
 }
 
 .stats b {
   color: var(--ink);
+  font-family: var(--font-pixel), 'Comic Sans MS', sans-serif;
   font-size: 28px;
   font-weight: 400;
+  line-height: 1;
 }
 
 .linkRow {
@@ -153,8 +157,8 @@
   overflow: hidden;
   font-family: var(--font-text), monospace;
   font-size: 14px;
-  font-weight: 500;
-  line-height: 1;
+  font-weight: 400;
+  line-height: 21px;
   text-align: left;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -350,10 +354,6 @@
   .linkRow {
     width: 100%;
     padding: 0 6px 0 14px;
-  }
-
-  .linkText {
-    font-size: 18px;
   }
 
   .copy {

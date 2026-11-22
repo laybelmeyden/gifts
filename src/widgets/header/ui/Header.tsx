@@ -1,5 +1,6 @@
 'use client';
 
+import { t } from '@contracts/i18n';
 import { useSession } from '@entities/session';
 import { SignOutButton } from '@features/auth';
 import { routes } from '@shared/config';
@@ -14,21 +15,21 @@ export function Header() {
       {session.status === 'authenticated' ? (
         <>
           <p className={styles.item}>
-            Почта <strong>{session.user.email}</strong>
+            {t.header.email} <strong>{session.user.email}</strong>
           </p>
           {session.user.role === 'admin' && (
             <ButtonLink variant="link" href={routes.admin}>
-              Админка
+              {t.header.admin}
             </ButtonLink>
           )}
           <ButtonLink variant="link" href={routes.myList}>
-            Мой список
+            {t.header.myList}
           </ButtonLink>
           <SignOutButton />
         </>
       ) : (
         <ButtonLink variant="link" href={routes.signIn}>
-          Войти
+          {t.common.signIn}
         </ButtonLink>
       )}
     </header>

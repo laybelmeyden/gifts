@@ -1,5 +1,6 @@
 import 'server-only';
 import { sql } from 'drizzle-orm';
+import { t } from '../../contracts/i18n';
 import { updateProfileSchema, type ProfileFields } from '../../contracts/profile';
 import { db } from '../db';
 
@@ -15,7 +16,7 @@ export async function updateProfile(userId: string, input: unknown): Promise<Upd
       const field = String(issue.path[0] ?? '');
       if (field && !fields[field]) fields[field] = issue.message;
     }
-    return { ok: false, status: 400, code: 'validation', message: 'Проверьте поля.', fields };
+    return { ok: false, status: 400, code: 'validation', message: t.api.checkFields, fields };
   }
 
   const data = parsed.data;
@@ -27,8 +28,8 @@ export async function updateProfile(userId: string, input: unknown): Promise<Upd
       ok: false,
       status: 409,
       code: 'handle_taken',
-      message: 'Этот ник уже занят.',
-      fields: { handle: 'Этот ник уже занят.' },
+      message: t.api.handleTaken,
+      fields: { handle: t.api.handleTaken },
     };
   }
 
@@ -48,7 +49,7 @@ export async function updateProfile(userId: string, input: unknown): Promise<Upd
     `);
     const profile = saved.rows[0];
     if (!profile) {
-      return { ok: false, status: 404, code: 'not_found', message: 'Пользователь не найден.' };
+      return { ok: false, status: 404, code: 'not_found', message: t.api.userNotFound };
     }
     return { ok: true, profile };
   } catch (error) {
@@ -57,8 +58,8 @@ export async function updateProfile(userId: string, input: unknown): Promise<Upd
         ok: false,
         status: 409,
         code: 'email_taken',
-        message: 'Эта почта уже занята.',
-        fields: { email: 'Эта почта уже занята.' },
+        message: t.api.emailTaken,
+        fields: { email: t.api.emailTaken },
       };
     }
     throw error;

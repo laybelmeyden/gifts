@@ -1,3 +1,4 @@
+import { t } from '@contracts/i18n';
 import { Header } from '@widgets/header';
 import styles from './BoardPage.module.css';
 
@@ -13,10 +14,10 @@ export function BoardPage({ userId }: BoardPageProps) {
     <section className={styles.board}>
       <Header />
       <header className={styles.head}>
-        <h1 className={styles.title}>{isOwn ? 'Ваш список подарков' : 'Список подарков'}</h1>
+        <h1 className={styles.title}>{isOwn ? t.board.ownTitle : t.board.title}</h1>
       </header>
       <div className={styles.empty}>
-        <p>{isOwn ? 'Пока пусто. Добавьте первый подарок.' : 'У этого человека пока нет подарков.'}</p>
+        <p>{isOwn ? t.board.ownEmpty : t.board.empty}</p>
       </div>
     </section>
   );

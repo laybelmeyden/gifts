@@ -1,5 +1,6 @@
 'use client';
 
+import { t } from '@contracts/i18n';
 import { authClient } from '@shared/api';
 import { routes } from '@shared/config';
 import { Button, useToast } from '@shared/ui';
@@ -27,7 +28,7 @@ export function SignOutButton() {
 
   return (
     <Button variant="link" onClick={handleClick} loading={pending}>
-      Выйти
+      {t.common.signOut}
     </Button>
   );
 }

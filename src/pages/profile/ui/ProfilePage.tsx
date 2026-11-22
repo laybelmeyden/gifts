@@ -1,5 +1,6 @@
 'use client';
 
+import { t } from '@contracts/i18n';
 import { updateProfileSchema } from '@contracts/profile';
 import { updateProfile } from '@features/edit-profile';
 import { authClient, ApiError } from '@shared/api';
@@ -17,28 +18,8 @@ type ProfilePageProps = {
   birthday: string | null;
 };
 
-const settings = [
-  {
-    key: 'bookings',
-    title: 'Показывать счётчик броней',
-    hint: 'Только сколько, без имён и подарков',
-  },
-  {
-    key: 'friends',
-    title: 'Праздники подруг',
-    hint: 'Напоминания за неделю',
-  },
-  {
-    key: 'mail',
-    title: 'Письма о новых бронях',
-    hint: 'Без спойлеров, что именно',
-  },
-  {
-    key: 'visibility',
-    title: 'Кто видит мой профиль',
-    hint: 'Все по ссылке',
-  },
-] as const;
+const text = t.profile;
+const settingKeys = ['bookings', 'friends', 'mail', 'visibility'] as const;
 
 export function ProfilePage({
   name: initialName,
@@ -62,6 +43,7 @@ export function ProfilePage({
     visibility: true,
   });
   const nick = handle.trim() || nickFromName(name);
+  const displayName = name.trim() || t.common.defaultName;
   const lists = 0;
   const wishes = 0;
   const received = 0;
@@ -71,7 +53,7 @@ export function ProfilePage({
     try {
       await authClient.signOut();
     } catch {
-      showToast('Нет сети или сервер недоступен.');
+      showToast(t.common.networkError);
       setLeaving(false);
       return;
     }
@@ -83,16 +65,16 @@ export function ProfilePage({
     const url = `gifts-plum-mu.vercel.app/${nick}`;
     try {
       await navigator.clipboard.writeText(url);
-      showToast('Ссылка скопирована.');
+      showToast(text.linkCopied);
     } catch {
-      showToast('Не получилось скопировать.');
+      showToast(text.copyFailed);
     }
   }
 
   const leaveButton = (className: string) => (
     <Button variant="link" className={`${styles.leave} ${className}`} loading={leaving} onClick={() => void leave()}>
       <span className={styles.leaveIcon} aria-hidden="true" />
-      Выйти из аккаунта
+      {text.signOut}
     </Button>
   );
 
@@ -116,7 +98,7 @@ export function ProfilePage({
       setHandle(saved.handle ?? parsed.data.handle);
       setEmail(saved.email);
       setBirthday(saved.birthday ?? '');
-      showToast('Сохранено.');
+      showToast(text.saved);
       router.refresh();
     } catch (error) {
       if (error instanceof ApiError && error.fields) {
@@ -124,7 +106,7 @@ export function ProfilePage({
       } else if (error instanceof ApiError) {
         showToast(error.message);
       } else {
-        showToast('Нет сети или сервер недоступен.');
+        showToast(t.common.networkError);
       }
     } finally {
       setSaving(false);
@@ -133,26 +115,26 @@ export function ProfilePage({
 
   return (
     <section className={styles.page}>
-      <h1>Профиль</h1>
+      <h1>{text.title}</h1>
       <div className={styles.layout}>
         <aside className={`px ${styles.card}`}>
           <span className={`px ${styles.avatar}`} aria-hidden="true">
-            {name.trim().slice(0, 1).toUpperCase() || 'М'}
+            {displayName.slice(0, 1).toUpperCase()}
           </span>
-          <strong className={styles.cardName}>{name.trim() || 'Мечтатель'}</strong>
+          <strong className={styles.cardName}>{displayName}</strong>
           <small className={styles.cardHandle}>{formatHandleLevel(nick)}</small>
           <div className={styles.stats}>
             <span>
               <b>{lists}</b>
-              {ruPlural(lists, 'вишлист', 'вишлиста', 'вишлистов')}
+              {ruPlural(lists, text.stats.lists)}
             </span>
             <span>
               <b>{wishes}</b>
-              {ruPlural(wishes, 'желание', 'желания', 'желаний')}
+              {ruPlural(wishes, text.stats.wishes)}
             </span>
             <span>
               <b>{received}</b>
-              {ruPlural(received, 'получено', 'получено', 'получено')}
+              {ruPlural(received, text.stats.received)}
             </span>
           </div>
           <div className={`px ${styles.linkRow}`}>
@@ -161,7 +143,7 @@ export function ProfilePage({
             <button
               className={styles.copy}
               type="button"
-              aria-label="Скопировать ссылку"
+              aria-label={text.copyLink}
               onClick={() => void copyLink()}
             >
               <div className={styles.copyIcon} aria-hidden="true" />
@@ -171,10 +153,10 @@ export function ProfilePage({
         </aside>
 
         <form className={styles.form} onSubmit={(event) => void save(event)} noValidate>
-          <p className={styles.kicker}>Личные данные</p>
+          <p className={styles.kicker}>{text.personal}</p>
           <div className={styles.fields}>
             <Input
-              label="Имя"
+              label={t.fields.name}
               name="name"
               value={name}
               autoComplete="name"
@@ -185,7 +167,7 @@ export function ProfilePage({
               }}
             />
             <Input
-              label="Ник для ссылки"
+              label={t.fields.handle}
               name="handle"
               value={handle}
               autoComplete="username"
@@ -196,7 +178,7 @@ export function ProfilePage({
               }}
             />
             <Input
-              label="Почта"
+              label={t.fields.email}
               name="email"
               type="email"
               value={email}
@@ -208,10 +190,10 @@ export function ProfilePage({
               }}
             />
             <Input
-              label="День рождения"
+              label={t.fields.birthday}
               name="birthday"
               value={birthday}
-              placeholder="дд.мм"
+              placeholder={t.fields.birthdayPlaceholder}
               error={errors.birthday}
               end={<CalendarIcon className={styles.calendar} />}
               onChange={(event) => {
@@ -221,25 +203,25 @@ export function ProfilePage({
             />
           </div>
 
-          <p className={styles.kicker}>Уведомления и приватность</p>
+          <p className={styles.kicker}>{text.settingsTitle}</p>
           <div className={styles.settings}>
-            {settings.map((item) => (
-              <div key={item.key} className={styles.setting}>
+            {settingKeys.map((key) => (
+              <div key={key} className={styles.setting}>
                 <span>
-                  <strong>{item.title}</strong>
-                  <small>{item.hint}</small>
+                  <strong>{text.settings[key].title}</strong>
+                  <small>{text.settings[key].hint}</small>
                 </span>
                 <Switch
-                  checked={toggles[item.key]}
-                  label={item.title}
-                  onChange={(checked) => setToggles((value) => ({ ...value, [item.key]: checked }))}
+                  checked={toggles[key]}
+                  label={text.settings[key].title}
+                  onChange={(checked) => setToggles((value) => ({ ...value, [key]: checked }))}
                 />
               </div>
             ))}
           </div>
 
           <Button type="submit" className={styles.save} loading={saving}>
-            Сохранить изменения
+            {text.save}
           </Button>
         </form>
         {leaveButton(styles.leaveMobile)}
