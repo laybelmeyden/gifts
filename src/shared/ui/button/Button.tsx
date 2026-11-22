@@ -44,7 +44,7 @@ export function Button({
           <span className={styles.heart} aria-hidden="true" />
         </span>
       ) : null}
-      <span className={loading ? styles.srOnly : undefined}>{children}</span>
+      <span className={loading ? styles.srOnly : styles.label}>{children}</span>
     </button>
   );
 }

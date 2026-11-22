@@ -16,6 +16,17 @@
   width: min(100%, 360px);
 }
 
+.empty .stage {
+  width: 300px;
+  max-width: 100%;
+  aspect-ratio: 500 / 600;
+}
+
+.empty .gift {
+  width: 128px;
+  aspect-ratio: 128 / 112;
+}
+
 .beam,
 .beamDim,
 .glow,

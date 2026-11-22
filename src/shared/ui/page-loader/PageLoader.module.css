@@ -1,0 +1,53 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.text {
+  margin: 0;
+  color: var(--ink);
+  font-size: 32px;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+@media (max-width: 800px) {
+  .screen {
+    min-height: calc(100dvh - 96px);
+  }
+
+  .text {
+    font-size: 32px;
+  }
+}
+
+.heart {
+  width: 130px;
+  aspect-ratio: 130 / 110;
+  background: url('/hero/heart.png') center / 100% 100% no-repeat;
+  image-rendering: pixelated;
+  animation: float 2.6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(-11px);
+  }
+
+  50% {
+    transform: translateY(11px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heart {
+    animation: none;
+  }
+}

@@ -9,113 +9,194 @@
 .side {
   display: flex;
   flex-direction: column;
+  align-items: center;
   min-height: 100vh;
-  padding: 28px 24px 24px;
+  padding: 28px 25px 24px;
   border-right: 2px solid rgb(74 55 117 / 55%);
+  background: rgb(14 8 25 / 92%);
+}
+
+.brand {
+  align-self: flex-start;
 }
 
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-top: 28px;
+  gap: 8px;
+  width: 214px;
+  margin-top: 40px;
 }
 
 .item {
   display: flex;
+  gap: 12px;
   align-items: center;
-  height: 45px;
-  padding: 0 16px;
+  width: 214px;
+  height: 49px;
+  padding: 2px 14px 0;
   border: 0;
   background: transparent;
   color: var(--muted);
   font: inherit;
+  font-family: var(--font-text), monospace;
   font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
   text-align: left;
   text-decoration: none;
+  white-space: nowrap;
   cursor: pointer;
 }
 
-.item.active {
-  --px-fill: var(--accent);
-  --px-line: var(--lavender);
+.item:hover {
+  opacity: 0.5;
+}
+
+:global(.px).active {
+  --px-fill: var(--bg);
+  --px-line: var(--lilac);
   border: 2px solid transparent;
   background:
     linear-gradient(var(--px-fill), var(--px-fill)) padding-box,
     linear-gradient(var(--px-line), var(--px-line)) border-box;
-  clip-path: polygon(
-    4px 0,
-    calc(100% - 4px) 0,
-    100% 4px,
-    100% calc(100% - 4px),
-    calc(100% - 4px) 100%,
-    4px 100%,
-    0 calc(100% - 4px),
-    0 4px
-  );
   color: var(--ink);
 }
 
-.item:hover {
-  color: var(--ink);
+.icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background-color: var(--muted);
+  mask: center / 20px 20px no-repeat;
+  -webkit-mask: center / 20px 20px no-repeat;
+  image-rendering: pixelated;
 }
 
-.create {
-  width: 100%;
+.active .icon {
+  background-color: #ff7ab6;
+}
+
+.list {
+  mask-image: url('/sidebar/list.png');
+  -webkit-mask-image: url('/sidebar/list.png');
+}
+
+.friends {
+  mask-image: url('/sidebar/friends.png');
+  -webkit-mask-image: url('/sidebar/friends.png');
+}
+
+.gift {
+  mask-image: url('/sidebar/gift.png');
+  -webkit-mask-image: url('/sidebar/gift.png');
+}
+
+.calendar {
+  mask-image: url('/sidebar/calendar.png');
+  -webkit-mask-image: url('/sidebar/calendar.png');
+}
+
+.user {
+  mask-image: url('/sidebar/user.png');
+  -webkit-mask-image: url('/sidebar/user.png');
+}
+
+.count {
+  margin-left: auto;
+  padding-left: 12px;
+  color: var(--lilac);
+  font-size: 16px;
+}
+
+.active .count {
+  color: var(--lavender);
+}
+
+.side .create {
+  --btn-fill: #ff7ab6;
+  --btn-line: #fff;
+  width: 214px;
   margin-top: auto;
+  color: var(--bg);
+  font-size: 16px;
+}
+
+.plus {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: url('/sidebar/plus.png') center / 16px 16px no-repeat;
+  image-rendering: pixelated;
 }
 
 .me {
   display: flex;
   gap: 12px;
   align-items: center;
+  width: 214px;
   margin-top: 16px;
 }
 
 .avatar {
   display: grid;
-  flex: 0 0 40px;
+  flex: none;
   place-items: center;
-  width: 40px;
-  height: 40px;
-  background: var(--accent);
-  font-family: var(--font-pixel), 'Comic Sans MS', sans-serif;
+  width: 48px;
+  height: 48px;
+  padding-top: 4px;
+  color: var(--bg);
+  font: inherit;
+  font-size: 18px;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.avatar:hover {
+  opacity: 0.5;
+}
+
+:global(.px).avatar {
+  --px-fill: var(--pink);
+  --px-line: var(--pink);
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--px-fill), var(--px-fill)) padding-box,
+    linear-gradient(var(--px-line), var(--px-line)) border-box;
+}
+
+.who {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding-top: 3px;
 }
 
 .me strong,
 .me small {
   display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .me strong {
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
 }
 
 .me small {
-  color: var(--faint);
-  font-size: 12px;
-}
-
-.me .leave,
-.mobileBar .leave {
-  height: auto;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  clip-path: none;
-  color: var(--lilac);
-  font: inherit;
+  color: var(--muted);
+  font-family: var(--font-text), monospace;
   font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.me .leave:hover,
-.mobileBar .leave:hover {
-  color: #fff;
+  line-height: 1;
 }
 
 .main {
@@ -144,7 +225,7 @@
   }
 
   .main {
-    padding-bottom: 88px;
+    padding-bottom: calc(96px + env(safe-area-inset-bottom));
   }
 
   .tabs {
@@ -154,29 +235,81 @@
     left: 0;
     z-index: 5;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    padding: 10px 4px calc(10px + env(safe-area-inset-bottom));
-    border-top: 2px solid var(--line);
-    background: rgb(7 4 13 / 94%);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    align-items: center;
+    height: calc(72px + env(safe-area-inset-bottom));
+    padding: 0 4px env(safe-area-inset-bottom);
+    border-top: 2px solid #2c2045;
+    background: rgb(14 8 25 / 92%);
   }
 
-  .tabs a,
-  .tabs button {
+  .tab {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    min-width: 0;
     padding: 0;
     border: 0;
     background: transparent;
     color: var(--faint);
     font: inherit;
+    font-family: var(--font-text), monospace;
     font-size: 10px;
     font-weight: 500;
+    line-height: 1;
     letter-spacing: 0.06em;
-    text-align: center;
     text-decoration: none;
     text-transform: uppercase;
+    white-space: nowrap;
     cursor: pointer;
+  }
+
+  .tab .icon {
+    background-color: var(--faint);
   }
 
   .tabActive {
     color: var(--ink);
+  }
+
+  .tabActive .icon {
+    background-color: #ff7ab6;
+  }
+
+  .tabActive::after {
+    position: absolute;
+    bottom: -8px;
+    width: 16px;
+    height: 2px;
+    background: #ff7ab6;
+    content: '';
+  }
+
+  .tabCreate {
+    justify-self: center;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 2px solid #fff;
+    background: #ff7ab6;
+    box-shadow: 0 0 16px rgb(255 122 182 / 55%);
+    cursor: pointer;
+  }
+
+  .tabPlus {
+    width: 18px;
+    height: 18px;
+    background:
+      linear-gradient(var(--bg), var(--bg)) center / 18px 4px no-repeat,
+      linear-gradient(var(--bg), var(--bg)) center / 4px 18px no-repeat;
+  }
+
+  .tab:hover,
+  .tabCreate:hover {
+    opacity: 0.5;
   }
 }

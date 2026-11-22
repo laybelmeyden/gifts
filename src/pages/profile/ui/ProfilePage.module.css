@@ -1,0 +1,397 @@
+.page {
+  min-height: 100vh;
+  padding: 36px 48px 48px;
+}
+
+.page h1 {
+  margin: 0 0 24px;
+  font-size: 36px;
+  line-height: 1;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 380px minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+  min-width: 0;
+}
+
+.card {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  width: 380px;
+  min-height: 442px;
+  padding: 28px 26px;
+  gap: 16px;
+  text-align: center;
+}
+
+:global(.px).card {
+  --px-fill: #140c24;
+  --px-line: #f6f1ff;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--px-fill), var(--px-fill)) padding-box,
+    linear-gradient(var(--px-line), var(--px-line)) border-box;
+}
+
+.avatar {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 88px;
+  height: 88px;
+  padding-top: 8px;
+  color: var(--bg);
+  font-size: 36px;
+  line-height: 1;
+}
+
+:global(.px).avatar {
+  --px-fill: #ff7ab6;
+  --px-line: #ff7ab6;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--px-fill), var(--px-fill)) padding-box,
+    linear-gradient(var(--px-line), var(--px-line)) border-box;
+}
+
+.cardName {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.cardHandle {
+  max-width: 100%;
+  margin: 0;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--font-text), monospace;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stats {
+  display: grid;
+  flex: none;
+  grid-template-columns: 104px 104px 104px;
+  gap: 8px;
+  width: 328px;
+}
+
+.stats span {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  width: 104px;
+  height: 68px;
+  padding: 0;
+  border: 2px solid #2c2045;
+  background: #07040d;
+  color: var(--faint);
+  font-size: 14px;
+  line-height: 1;
+  text-transform: lowercase;
+}
+
+.stats b {
+  color: var(--ink);
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.linkRow {
+  display: flex;
+  flex: none;
+  align-items: center;
+  width: 328px;
+  height: 56px;
+  padding: 0 10px;
+  color: var(--muted);
+}
+
+:global(.px).linkRow {
+  --px-fill: #07040d;
+  --px-line: #b9a3ff;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--px-fill), var(--px-fill)) padding-box,
+    linear-gradient(var(--px-line), var(--px-line)) border-box;
+}
+
+.linkIcon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: currentColor;
+  mask: url('/sidebar/link.png') center / 16px 16px no-repeat;
+  -webkit-mask: url('/sidebar/link.png') center / 16px 16px no-repeat;
+  image-rendering: pixelated;
+}
+
+.linkText {
+  flex: 1;
+  color: #f6f1ff;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  font-family: var(--font-text), monospace;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.copy {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: currentColor;
+  cursor: pointer;
+}
+
+.copyIcon {
+  width: 20px;
+  height: 20px;
+  background-color: currentColor;
+  mask: url('/sidebar/copy.png') center / 20px 20px no-repeat;
+  -webkit-mask: url('/sidebar/copy.png') center / 20px 20px no-repeat;
+  image-rendering: pixelated;
+}
+
+.copy:hover {
+  opacity: 0.5;
+}
+
+.layout .leave {
+  margin-top: 16px;
+  color: var(--lilac);
+  font-size: 16px;
+  text-transform: none;
+}
+
+.leaveIcon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background-color: currentColor;
+  mask: url('/sidebar/leave.png') center / 16px 16px no-repeat;
+  -webkit-mask: url('/sidebar/leave.png') center / 16px 16px no-repeat;
+  image-rendering: pixelated;
+}
+
+.calendar {
+  flex: none;
+  color: var(--faint);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.kicker {
+  margin: 0 0 16px;
+  color: var(--ink);
+  font-family: var(--font-text), monospace;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.fields + .kicker {
+  margin-top: 26px;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+}
+
+.fields > label {
+  min-width: 0;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.fields input {
+  font-family: var(--font-text), monospace;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+}
+
+.setting {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  height: 71px;
+  padding: 0 16px;
+  border: 2px solid #2c2045;
+  background: #140c24;
+}
+
+.setting + .setting {
+  margin-top: -2px;
+}
+
+.setting span {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+
+.setting strong,
+.setting small {
+  font-family: var(--font-text), monospace;
+}
+
+.setting strong {
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  padding-bottom: 2px;
+}
+
+.setting small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.form .save {
+  --btn-fill: #7c4dff;
+  align-self: start;
+  margin-top: 16px;
+  color: var(--ink);
+  font-size: 16px;
+}
+
+.layout .leaveMobile {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .page {
+    min-height: 0;
+    padding: 24px 20px 24px;
+  }
+
+  .page h1 {
+    display: none;
+  }
+
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  :global(.px).card {
+    position: relative;
+    width: 100%;
+    min-height: 0;
+    padding: 24px 0 0;
+    border: 0;
+    background: none;
+    clip-path: none;
+  }
+
+  .cardName {
+    max-width: 100%;
+    font-size: 28px;
+  }
+
+  .stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .stats span {
+    width: auto;
+  }
+
+  .linkRow {
+    width: 100%;
+    padding: 0 6px 0 14px;
+  }
+
+  .linkText {
+    font-size: 18px;
+  }
+
+  .copy {
+    width: 36px;
+    height: 36px;
+    border: 2px solid #b9a3ff;
+    background: var(--raised);
+  }
+
+  .layout .leaveDesktop {
+    display: none;
+  }
+
+  .layout .leaveMobile {
+    display: inline-flex;
+    justify-self: center;
+    margin-top: 0;
+  }
+
+  .fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .setting {
+    height: 60px;
+    padding: 0 14px;
+  }
+
+  .setting strong {
+    font-size: 16px;
+  }
+
+  .setting small {
+    font-size: 12px;
+  }
+
+  .form .save {
+    align-self: stretch;
+    margin-top: 24px;
+  }
+}

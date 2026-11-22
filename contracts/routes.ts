@@ -4,8 +4,7 @@ export const routes = {
   signIn: '/sign-in',
   signUp: '/sign-up',
   myList: '/list',
+  profile: '/profile',
   userList: (userId: string) => `/u/${encodeURIComponent(userId)}`,
-  recovery: '/recovery',
-  resetPassword: '/reset-password',
   admin: '/admin',
 } as const;

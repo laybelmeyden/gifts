@@ -5,6 +5,7 @@ import styles from './HeroScene.module.css';
 type HeroSceneProps = {
   quote?: boolean;
   compact?: boolean;
+  empty?: boolean;
   className?: string;
 };
 
@@ -23,9 +24,9 @@ const hearts = [
   { x: '80%', y: '83%', kind: 'pink' },
 ] as const;
 
-export function HeroScene({ quote = false, compact = false, className }: HeroSceneProps) {
+export function HeroScene({ quote = false, compact = false, empty = false, className }: HeroSceneProps) {
   return (
-    <div className={cx(styles.scene, compact && styles.compact, className)}>
+    <div className={cx(styles.scene, compact && styles.compact, empty && styles.empty, className)}>
       <div className={styles.stage} aria-hidden="true">
         <span className={styles.beamDim} />
         <span className={styles.beam} />

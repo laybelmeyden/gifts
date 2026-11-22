@@ -4,12 +4,14 @@ import { API_BASE } from '../config';
 export class ApiError extends Error {
   readonly status: number;
   readonly code: string;
+  readonly fields?: Partial<Record<string, string>>;
 
-  constructor(status: number, code: string, message: string) {
+  constructor(status: number, code: string, message: string, fields?: Partial<Record<string, string>>) {
     super(message);
     this.name = 'ApiError';
     this.status = status;
     this.code = code;
+    this.fields = fields;
   }
 }
 
@@ -48,7 +50,9 @@ export async function apiFetch<T>(path: string, init: ApiRequestInit = {}): Prom
 
   const data: unknown = await response.json().catch(() => null);
   if (!response.ok) {
-    if (isErrorBody(data)) throw new ApiError(response.status, data.error.code, data.error.message);
+    if (isErrorBody(data)) {
+      throw new ApiError(response.status, data.error.code, data.error.message, data.error.fields);
+    }
     throw new ApiError(response.status, 'unknown', 'Сервер ответил ошибкой. Попробуйте ещё раз.');
   }
   return data as T;

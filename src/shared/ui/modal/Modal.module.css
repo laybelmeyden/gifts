@@ -12,19 +12,76 @@
   inset: 0;
   padding: 0;
   border: 0;
-  background: rgba(5, 2, 8, 0.72);
+  background: rgb(7 4 13 / 72%);
   cursor: pointer;
 }
 
-.card {
+.glow {
   position: relative;
   z-index: 1;
-  width: min(380px, 100%);
-  min-width: 0;
-  max-width: 100%;
+  width: min(545px, 100%);
+  filter: drop-shadow(0 0 24px rgb(124 77 255 / 45%));
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
   max-height: calc(100vh - 48px);
-  padding: 22px 20px 20px;
-  overflow-x: hidden;
+  padding: 32px 36px 36px;
   overflow-y: auto;
-  text-align: center;
+  text-align: left;
+}
+
+:global(.px).card {
+  --px-fill: var(--raised);
+  --px-line: var(--lilac);
+}
+
+.head {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.close {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+:global(.px).close {
+  --px-fill: var(--card);
+  --px-line: var(--line);
+}
+
+.close:hover {
+  opacity: 0.5;
+}
+
+.close svg {
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 800px) {
+  .card {
+    padding: 24px 20px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
 }

@@ -4,11 +4,12 @@ import { signInSchema, signUpSchema, type SignInInput, type SignUpInput } from '
 import { authClient } from '@shared/api';
 import { routes } from '@shared/config';
 import { fieldErrors, type FieldErrors } from '@shared/lib';
-import { Button, ButtonLink, Input, Logo, PasswordInput } from '@shared/ui';
+import { Button, ButtonLink, Input, Logo, PasswordInput, useModal } from '@shared/ui';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, type FormEvent, type ReactNode } from 'react';
 import { authErrorMessage, NETWORK_ERROR_MESSAGE } from '../model/auth-errors';
+import { FORGOT_PASSWORD_MODAL, ForgotPasswordModal } from './ForgotPasswordModal';
 import styles from './AuthPanel.module.css';
 
 type Mode = 'sign-in' | 'sign-up';
@@ -56,6 +57,7 @@ export function AuthPanel({ mode, art }: { mode: Mode; art: ReactNode }) {
           <AuthForm mode={mode} submitLabel={text.submit} />
         </div>
       </div>
+      {!isSignUp && <ForgotPasswordModal />}
     </div>
   );
 }
@@ -73,6 +75,7 @@ function AuthForm({ mode, submitLabel }: { mode: Mode; submitLabel: string }) {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [formError, setFormError] = useState('');
   const [pending, setPending] = useState(false);
+  const { openModal } = useModal();
   const isSignUp = mode === 'sign-up';
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -137,9 +140,9 @@ function AuthForm({ mode, submitLabel }: { mode: Mode; submitLabel: string }) {
         error={errors.password}
       />
       {!isSignUp && (
-        <ButtonLink variant="link" href={routes.recovery} className={styles.forgot}>
+        <Button variant="link" className={styles.forgot} onClick={() => openModal(FORGOT_PASSWORD_MODAL)}>
           Забыли пароль?
-        </ButtonLink>
+        </Button>
       )}
       {formError && (
         <p className={styles.formError} role="alert">

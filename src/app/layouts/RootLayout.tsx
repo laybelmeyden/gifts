@@ -2,7 +2,7 @@ import type { SessionUser } from '@contracts/user';
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { AppProviders } from '../providers';
-import { pixelFont } from '../styles/fonts';
+import { pixelFont, textFont } from '../styles/fonts';
 import '../styles/globals.css';
 
 export const rootMetadata: Metadata = {
@@ -24,7 +24,7 @@ type RootLayoutProps = {
 
 export function RootLayout({ user, children }: RootLayoutProps) {
   return (
-    <html lang="ru" className={pixelFont.variable}>
+    <html lang="ru" className={`${pixelFont.variable} ${textFont.variable}`}>
       <body>
         <div className="stars" aria-hidden="true" />
         <AppProviders user={user}>{children}</AppProviders>

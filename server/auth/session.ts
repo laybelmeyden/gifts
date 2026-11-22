@@ -12,6 +12,8 @@ export const getSessionUser = cache(async (): Promise<SessionUser | null> => {
     id: session.user.id,
     name: session.user.name,
     email: session.user.email,
+    handle: session.user.handle ?? null,
+    birthday: session.user.birthday ?? null,
     role: session.user.role ?? 'user',
   };
 });

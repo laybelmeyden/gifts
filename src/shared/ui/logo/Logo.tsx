@@ -4,9 +4,9 @@ import { cx } from '../../lib';
 import { PixelHeart } from '../pixel-heart/PixelHeart';
 import styles from './Logo.module.css';
 
-export function Logo({ className }: { className?: string }) {
+export function Logo({ className, href = routes.home }: { className?: string; href?: string }) {
   return (
-    <Link href={routes.home} className={cx(styles.logo, className)}>
+    <Link href={href} className={cx(styles.logo, className)}>
       <PixelHeart className={styles.heart} />
       GIFTS
     </Link>

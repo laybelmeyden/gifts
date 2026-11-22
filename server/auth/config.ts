@@ -38,6 +38,16 @@ export const auth = betterAuth({
         defaultValue: 'user',
         input: false,
       },
+      handle: {
+        type: 'string',
+        required: false,
+        input: false,
+      },
+      birthday: {
+        type: 'string',
+        required: false,
+        input: false,
+      },
     },
   },
   rateLimit: {
