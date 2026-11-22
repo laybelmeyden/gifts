@@ -1,6 +1,7 @@
 import { AuthPanel } from '@features/auth';
 import { HeroScene } from '@widgets/hero-scene';
 
-export function SignUpPage() {
-  return <AuthPanel mode="sign-up" art={<HeroScene quote />} />;
+/** `next` - куда вернуть после регистрации (например, к подарку, который хотели забронировать). */
+export function SignUpPage({ next }: { next: string | null }) {
+  return <AuthPanel mode="sign-up" next={next} art={<HeroScene quote />} />;
 }

@@ -1,0 +1,219 @@
+:global(.px).dialog {
+  gap: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.summary {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  min-width: 0;
+  padding: 10px 12px;
+}
+
+:global(.px).summary {
+  --px-fill: var(--card);
+  --px-line: #2c2045;
+}
+
+.thumb {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  background: #22183c;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cover {
+  width: 18px;
+  height: 18px;
+  background-color: var(--lavender);
+  mask: center / contain no-repeat;
+  -webkit-mask: center / contain no-repeat;
+}
+
+.gift {
+  mask-image: url('/gift/gift.svg');
+  -webkit-mask-image: url('/gift/gift.svg');
+}
+
+.star {
+  mask-image: url('/gift/star.svg');
+  -webkit-mask-image: url('/gift/star.svg');
+}
+
+.heart {
+  mask-image: url('/hero/heart.png');
+  -webkit-mask-image: url('/hero/heart.png');
+}
+
+.giftText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.giftTitle {
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--font-text), monospace;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.price {
+  color: var(--pink);
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.label {
+  color: var(--muted);
+  font-family: var(--font-text), monospace;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 16px;
+}
+
+:global(.px).control {
+  --px-fill: var(--bg);
+  --px-line: var(--line);
+}
+
+:global(.px).control:hover,
+:global(.px).control:focus-within {
+  --px-line: var(--lilac);
+}
+
+:global(.px).invalid,
+:global(.px).invalid:hover,
+:global(.px).invalid:focus-within {
+  --px-line: var(--err);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-text), monospace;
+  font-size: 14px;
+}
+
+.input::placeholder {
+  color: var(--faint);
+}
+
+.error {
+  color: var(--err);
+  font-size: 14px;
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.setting {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 60px;
+  padding: 10px 16px;
+  border: 2px solid #2c2045;
+  background: var(--card);
+}
+
+.setting > span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.setting strong {
+  color: var(--ink);
+  font-family: var(--font-text), monospace;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+}
+
+.setting small {
+  color: var(--muted);
+  font-family: var(--font-text), monospace;
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.soon {
+  opacity: 0.55;
+}
+
+.form .submit {
+  gap: 10px;
+  padding: 2px 24px 0;
+  color: var(--bg);
+  font-family: var(--font-text), monospace;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+}
+
+.giftIcon {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  margin-top: -2px;
+  background-color: currentColor;
+  mask: url('/gift/gift.svg') center / contain no-repeat;
+  -webkit-mask: url('/gift/gift.svg') center / contain no-repeat;
+}
+
+.note {
+  margin: -4px 0 0;
+  color: var(--faint);
+  font-family: var(--font-text), monospace;
+  font-size: 11px;
+  line-height: 16px;
+  text-align: center;
+}

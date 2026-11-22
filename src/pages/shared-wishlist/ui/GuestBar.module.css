@@ -1,0 +1,49 @@
+.bar {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.create {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  height: 36px;
+  padding: 2px 14px 0;
+  color: var(--ink);
+  font-family: var(--font-text), monospace;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 14px;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+:global(.px).create {
+  --px-fill: var(--bg);
+  --px-line: var(--ink);
+}
+
+.create:hover {
+  opacity: 0.6;
+}
+
+.plus {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  margin-top: -2px;
+  background-color: currentColor;
+  mask: url('/sidebar/plus.png') center / contain no-repeat;
+  -webkit-mask: url('/sidebar/plus.png') center / contain no-repeat;
+}
+
+@media (max-width: 480px) {
+  .create {
+    padding: 2px 10px 0;
+    font-size: 9px;
+  }
+}

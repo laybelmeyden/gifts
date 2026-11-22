@@ -1,0 +1,58 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: safe center;
+  min-height: 100vh;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.code {
+  margin: 0;
+  color: var(--pink);
+  font-family: var(--font-pixel);
+  font-size: 96px;
+  line-height: 1;
+  text-shadow: 6px 6px 0 rgb(124 77 255 / 45%);
+}
+
+.page h1 {
+  margin: 0;
+  font-size: 42px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.text {
+  max-width: 520px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 21px;
+  line-height: 28px;
+}
+
+.home {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background-color: currentColor;
+  mask: url('/sidebar/gift.png') center / contain no-repeat;
+  -webkit-mask: url('/sidebar/gift.png') center / contain no-repeat;
+}
+
+@media (max-width: 800px) {
+  .code {
+    font-size: 72px;
+  }
+
+  .page h1 {
+    font-size: 32px;
+  }
+
+  .text {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}

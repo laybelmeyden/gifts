@@ -53,6 +53,26 @@
   opacity: 0.5;
 }
 
+.withEye {
+  gap: 10px;
+  padding-right: 42px;
+}
+
+.navRow {
+  position: relative;
+}
+
+.navRow .eye {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+.muted {
+  opacity: 0.4;
+}
+
 :global(.px).active {
   --px-fill: var(--bg);
   --px-line: var(--lilac);
@@ -102,11 +122,19 @@
   -webkit-mask-image: url('/sidebar/user.png');
 }
 
+.admin {
+  mask-image: url('/sidebar/admin.svg');
+  -webkit-mask-image: url('/sidebar/admin.svg');
+}
+
 .count {
   margin-left: auto;
-  padding-left: 12px;
-  color: var(--lilac);
-  font-size: 16px;
+  color: var(--muted);
+  font-family: var(--font-text), monospace;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 14px;
+  opacity: 0.7;
 }
 
 .active .count {
@@ -126,6 +154,7 @@
   flex: none;
   width: 16px;
   height: 16px;
+  margin-top: -4px;
   background: url('/sidebar/plus.png') center / 16px 16px no-repeat;
   image-rendering: pixelated;
 }

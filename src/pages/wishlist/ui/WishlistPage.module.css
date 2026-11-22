@@ -1,0 +1,445 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  min-height: 100vh;
+  padding: 32px 48px 48px;
+}
+
+.crumbs {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--faint);
+  font-family: var(--font-text), monospace;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.back {
+  display: flex;
+  flex: 0 1 auto;
+  min-width: 0;
+  gap: 8px;
+  align-items: center;
+  color: var(--lilac);
+  text-decoration: none;
+}
+
+.back:hover {
+  opacity: 0.6;
+}
+
+.arrow {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  background-color: currentColor;
+  mask: url('/auth/arrow-left.png') center / contain no-repeat;
+  -webkit-mask: url('/auth/arrow-left.png') center / contain no-repeat;
+}
+
+/* Длинные названия обрезаются многоточием, иначе крошки на телефоне шире экрана. */
+.backText,
+.current {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.current {
+  color: var(--muted);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 20px;
+  align-items: center;
+}
+
+.cover {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+}
+
+:global(.px).cover {
+  --px-fill: var(--tone);
+  --px-line: var(--lilac);
+}
+
+.coverIcon {
+  width: 44px;
+  height: 44px;
+  color: var(--lavender);
+}
+
+.heading {
+  display: flex;
+  flex: 1 1 280px;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.heading h1 {
+  margin: 0;
+  overflow: hidden;
+  font-size: 40px;
+  line-height: 42px;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-text), monospace;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.seen {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 1px 8px 0;
+  border: 1px solid var(--line);
+  background: #221838;
+  font-size: 10px;
+  line-height: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.actions {
+  display: flex;
+  flex: none;
+  gap: 8px;
+  align-items: center;
+}
+
+.share {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  height: 48px;
+  padding: 2px 20px 0;
+  color: var(--ink);
+  font-family: var(--font-text), monospace;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+:global(.px).share {
+  --px-fill: var(--bg);
+  --px-line: var(--ink);
+}
+
+.share:hover {
+  opacity: 0.6;
+}
+
+.page .add {
+  gap: 10px;
+  height: 48px;
+  padding: 2px 20px 0;
+  color: var(--bg);
+  font-family: var(--font-text), monospace;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+}
+
+.plus {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  background-color: currentColor;
+  mask: url('/sidebar/plus.png') center / contain no-repeat;
+  -webkit-mask: url('/sidebar/plus.png') center / contain no-repeat;
+}
+
+.icon {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  background-color: currentColor;
+  mask: center / contain no-repeat;
+  -webkit-mask: center / contain no-repeat;
+}
+
+.share .icon {
+  width: 14px;
+  height: 14px;
+  margin-top: -2px;
+}
+
+.page .add .plus {
+  margin-top: -2px;
+}
+
+.shareIcon {
+  mask-image: url('/wishlist/share.svg');
+  -webkit-mask-image: url('/wishlist/share.svg');
+}
+
+.eyeIcon {
+  width: 14px;
+  height: 14px;
+  color: var(--pink);
+  mask-image: url('/sidebar/eye.png');
+  -webkit-mask-image: url('/sidebar/eye.png');
+}
+
+.progress {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  min-height: 80px;
+  padding: 14px 20px;
+}
+
+:global(.px).progress {
+  --px-fill: var(--bg);
+  --px-line: var(--ink);
+}
+
+.progressMain {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.progressHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--ink);
+  font-family: var(--font-text), monospace;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.booked {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--muted);
+}
+
+.heart {
+  flex: none;
+  width: 12px;
+  height: 11px;
+  background-color: var(--pink);
+  mask: url('/hero/heart.png') center / contain no-repeat;
+  -webkit-mask: url('/hero/heart.png') center / contain no-repeat;
+}
+
+.bar {
+  display: block;
+  height: 14px;
+  padding: 2px;
+}
+
+:global(.px).bar {
+  --px-fill: var(--bg);
+  --px-line: var(--lavender);
+  clip-path: none;
+}
+
+.fill {
+  display: block;
+  height: 100%;
+  background: #ffd23f;
+}
+
+.secret {
+  display: flex;
+  flex: none;
+  gap: 8px;
+  align-items: center;
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-text), monospace;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  /* Заглавные JetBrains Mono сидят на 1px выше центра строки. */
+  padding: 2px 12px 0;
+  color: var(--lavender);
+  font-family: var(--font-text), monospace;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+:global(.px).chip {
+  --px-fill: var(--card);
+  --px-line: var(--line);
+}
+
+:global(.px).chip.chipOn {
+  --px-fill: var(--accent);
+  --px-line: var(--lilac);
+  color: var(--ink);
+}
+
+.chip:hover:not(.chipOn) {
+  opacity: 0.7;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(509px, 100%), 509px));
+  gap: 12px;
+  /* Полученный подарок выше на полосу «Получен», соседняя карточка не должна растягиваться. */
+  align-items: start;
+}
+
+.empty {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: safe center;
+  text-align: center;
+}
+
+.empty h2 {
+  margin: 0;
+  font-size: 42px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.empty p {
+  max-width: 520px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 21px;
+  line-height: 28px;
+}
+
+.emptyPlus {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  background: url('/sidebar/plus-light.png') center / 14px 14px no-repeat;
+  image-rendering: pixelated;
+}
+
+@media (max-width: 900px) {
+  .head {
+    flex-wrap: wrap;
+  }
+
+  .actions {
+    width: 100%;
+  }
+
+  .progress {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 800px) {
+  .page {
+    gap: 20px;
+    min-height: auto;
+    padding: 24px 24px 32px;
+  }
+
+  .empty h2 {
+    font-size: 32px;
+  }
+
+  .empty p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .cover {
+    width: 72px;
+    height: 72px;
+  }
+
+  .coverIcon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .heading h1 {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  .actions {
+    flex-wrap: wrap;
+  }
+
+  .actions .add {
+    flex: 1 1 100%;
+    justify-content: center;
+    order: -1;
+  }
+
+  .actions .share {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

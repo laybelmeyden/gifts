@@ -1,0 +1,32 @@
+.toggle {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.toggle:hover {
+  color: var(--ink);
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  background-color: currentColor;
+  mask: url('/sidebar/eye.png') center / 16px 16px no-repeat;
+  -webkit-mask: url('/sidebar/eye.png') center / 16px 16px no-repeat;
+}
+
+.hidden {
+  color: var(--faint);
+}
+
+.hidden .icon {
+  mask-image: url('/sidebar/eye-off.png');
+  -webkit-mask-image: url('/sidebar/eye-off.png');
+}

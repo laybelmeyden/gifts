@@ -1,0 +1,295 @@
+:global(.px).dialog {
+  gap: 20px;
+}
+
+.icon {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  background-color: currentColor;
+  mask: center / contain no-repeat;
+  -webkit-mask: center / contain no-repeat;
+}
+
+.linkIcon {
+  mask-image: url('/sidebar/link.png');
+  -webkit-mask-image: url('/sidebar/link.png');
+}
+
+.copyIcon {
+  mask-image: url('/sidebar/copy.png');
+  -webkit-mask-image: url('/sidebar/copy.png');
+}
+
+.giftIcon {
+  mask-image: url('/sidebar/gift.png');
+  -webkit-mask-image: url('/sidebar/gift.png');
+}
+
+.link {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  min-height: 48px;
+  padding: 4px 4px 4px 16px;
+  color: var(--lilac);
+}
+
+:global(.px).link {
+  --px-fill: var(--bg);
+  --px-line: var(--lilac);
+}
+
+/* Иначе длинная ссылка без переносов раздвигает окно шире экрана. */
+.url {
+  flex: 1;
+  min-width: 0;
+  contain: inline-size;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--font-text), monospace;
+  font-size: 14px;
+  line-height: 21px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Капс JetBrains Mono сидит на 1px выше центра строки, поэтому сверху 2px, а иконки поднимаем. */
+.copy,
+.channel,
+.download {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-family: var(--font-text), monospace;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.copy > *,
+.channel > *,
+.download > * {
+  margin-top: -2px;
+}
+
+.copy {
+  flex: none;
+  height: 36px;
+  padding: 2px 12px 0;
+  color: var(--ink);
+  font-size: 10px;
+  line-height: 14px;
+}
+
+:global(.px).copy {
+  --px-fill: var(--accent);
+  --px-line: var(--lilac);
+}
+
+.channels {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.channel {
+  justify-content: center;
+  width: 100%;
+  height: 40px;
+  padding: 2px 8px 0;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 14px;
+}
+
+:global(.px).channel {
+  --px-fill: var(--bg);
+  --px-line: var(--line);
+}
+
+.copy:hover,
+.channel:hover:not([aria-disabled='true']),
+.download:hover:not([aria-disabled='true']) {
+  opacity: 0.7;
+}
+
+.svg {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  color: var(--ink);
+}
+
+.vk {
+  flex: none;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.dots {
+  flex: none;
+  width: 14px;
+  height: 3px;
+  background-color: var(--ink);
+  mask: url('/wishlist/more.svg') center / contain no-repeat;
+  -webkit-mask: url('/wishlist/more.svg') center / contain no-repeat;
+}
+
+.kicker {
+  margin: 0 0 -10px;
+  color: var(--faint);
+  font-family: var(--font-text), monospace;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.card {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 20px 24px;
+}
+
+:global(.px).card {
+  --px-fill: var(--bg);
+  --px-line: var(--ink);
+}
+
+.cover {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+}
+
+:global(.px).cover {
+  --px-fill: var(--tone);
+  --px-line: var(--lilac);
+}
+
+.coverIcon {
+  width: 36px;
+  height: 36px;
+  color: var(--lavender);
+}
+
+.cardText {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.cardText strong {
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  overflow-wrap: anywhere;
+}
+
+.cardText small {
+  color: var(--muted);
+  font-family: var(--font-text), monospace;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.heart {
+  display: inline-block;
+  width: 12px;
+  height: 11px;
+  margin-left: 6px;
+  vertical-align: -1px;
+}
+
+.download {
+  justify-content: center;
+  width: 100%;
+  height: 48px;
+  padding: 2px 20px 0;
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+:global(.px).download {
+  --px-fill: var(--bg);
+  --px-line: var(--ink);
+}
+
+.soon {
+  position: relative;
+  display: grid;
+}
+
+.soon > [aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.soon::after {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  z-index: 2;
+  padding: 7px 10px 6px;
+  border: 2px solid var(--lavender);
+  background: var(--raised);
+  color: var(--ink);
+  content: attr(data-tip);
+  font-family: var(--font-text), monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 4px);
+  transition:
+    opacity 0.15s,
+    transform 0.15s;
+}
+
+@media (hover: hover) {
+  .soon:hover::after,
+  .soon:focus-within::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (max-width: 600px) {
+  .link {
+    flex-wrap: wrap;
+    padding: 8px;
+  }
+
+  .url {
+    flex-basis: calc(100% - 26px);
+  }
+
+  .copy {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .channels {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .card {
+    gap: 14px;
+    padding: 16px;
+  }
+}

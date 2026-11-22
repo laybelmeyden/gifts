@@ -3,7 +3,7 @@
 import { signInSchema, signUpSchema, type SignInInput, type SignUpInput } from '@contracts/auth';
 import { t } from '@contracts/i18n';
 import { authClient } from '@shared/api';
-import { routes } from '@shared/config';
+import { routes, withNext } from '@shared/config';
 import { fieldErrors, type FieldErrors } from '@shared/lib';
 import { Button, ButtonLink, Input, Logo, PasswordInput, useModal } from '@shared/ui';
 import Link from 'next/link';
@@ -20,7 +20,14 @@ const copy = {
   'sign-up': t.auth.signUp,
 };
 
-export function AuthPanel({ mode, art }: { mode: Mode; art: ReactNode }) {
+type AuthPanelProps = {
+  mode: Mode;
+  art: ReactNode;
+  /** Проверенный `safeNext` путь, куда вернуть после входа. */
+  next?: string | null;
+};
+
+export function AuthPanel({ mode, art, next = null }: AuthPanelProps) {
   const text = copy[mode];
   const isSignUp = mode === 'sign-up';
 
@@ -40,14 +47,14 @@ export function AuthPanel({ mode, art }: { mode: Mode; art: ReactNode }) {
           <h1 className={styles.title}>{text.title}</h1>
           <p className={styles.subtitle}>{text.subtitle}</p>
           <div className={styles.tabs}>
-            <Tab href={routes.signIn} active={!isSignUp}>
+            <Tab href={withNext(routes.signIn, next)} active={!isSignUp}>
               {t.auth.tabSignIn}
             </Tab>
-            <Tab href={routes.signUp} active={isSignUp}>
+            <Tab href={withNext(routes.signUp, next)} active={isSignUp}>
               {t.auth.tabSignUp}
             </Tab>
           </div>
-          <AuthForm mode={mode} submitLabel={text.submit} />
+          <AuthForm mode={mode} submitLabel={text.submit} next={next} />
         </div>
       </div>
       {!isSignUp && <ForgotPasswordModal />}
@@ -63,7 +70,7 @@ function Tab({ href, active, children }: { href: string; active: boolean; childr
   );
 }
 
-function AuthForm({ mode, submitLabel }: { mode: Mode; submitLabel: string }) {
+function AuthForm({ mode, submitLabel, next }: { mode: Mode; submitLabel: string; next: string | null }) {
   const router = useRouter();
   const [errors, setErrors] = useState<FieldErrors>({});
   const [formError, setFormError] = useState('');
@@ -98,7 +105,7 @@ function AuthForm({ mode, submitLabel }: { mode: Mode; submitLabel: string }) {
       return;
     }
 
-    router.replace(routes.myList);
+    router.replace(next ?? routes.myList);
     router.refresh();
   }
 

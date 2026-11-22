@@ -1,16 +1,20 @@
 import { t } from '@contracts/i18n';
 import { routes } from '@shared/config';
-import { ButtonLink, Card } from '@shared/ui';
+import { ButtonLink } from '@shared/ui';
+import { HeroScene } from '@widgets/hero-scene';
+import styles from './NotFoundPage.module.css';
 
 export function NotFoundPage() {
   return (
-    <div className="center-screen">
-    <Card kicker="404" title={t.notFound.title}>
-      <p className="quote">{t.notFound.text}</p>
-      <ButtonLink variant="link" block href={routes.home}>
+    <section className={styles.page}>
+      <HeroScene empty />
+      <p className={styles.code}>404</p>
+      <h1>{t.notFound.title}</h1>
+      <p className={styles.text}>{t.notFound.text}</p>
+      <ButtonLink href={routes.home}>
+        <span className={styles.home} aria-hidden="true" />
         {t.common.toHome}
       </ButtonLink>
-    </Card>
-    </div>
+    </section>
   );
 }

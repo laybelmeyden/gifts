@@ -17,6 +17,7 @@ export async function requireAdmin(): Promise<SessionUser> {
   return user;
 }
 
-export async function redirectIfSignedIn(): Promise<void> {
-  if (await getSessionUser()) redirect(routes.myList);
+/** `next` уже должен быть проверен через `safeNext`. */
+export async function redirectIfSignedIn(next: string | null = null): Promise<void> {
+  if (await getSessionUser()) redirect(next ?? routes.myList);
 }

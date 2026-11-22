@@ -312,6 +312,12 @@
   display: none;
 }
 
+@media (max-width: 1100px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 @media (max-width: 800px) {
   .page {
     min-height: 0;

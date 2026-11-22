@@ -1,0 +1,86 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 36px 48px 48px;
+}
+
+.page h1 {
+  margin: 0;
+  font-size: 36px;
+  line-height: 1;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  /* Заглавные JetBrains Mono сидят на 1px выше центра строки: опускаем текст, иконку возвращаем. */
+  padding: 2px 12px 0;
+  color: var(--lavender);
+  font-family: var(--font-text), monospace;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+:global(.px).chip {
+  --px-fill: var(--card);
+  --px-line: var(--line);
+}
+
+:global(.px).chip.chipOn {
+  --px-fill: var(--accent);
+  --px-line: var(--lilac);
+  color: var(--ink);
+}
+
+.chip > span {
+  margin-top: -6px;
+}
+
+.chip:hover:not(.chipOn) {
+  opacity: 0.7;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 279px);
+  gap: 14px;
+}
+
+@media (max-width: 800px) {
+  .page {
+    gap: 20px;
+    padding: 24px 24px 32px;
+  }
+
+  .page h1 {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+  }
+}

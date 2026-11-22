@@ -1,0 +1,33 @@
+.icon {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  background-color: currentColor;
+  mask: center / contain no-repeat;
+  -webkit-mask: center / contain no-repeat;
+}
+
+.cake {
+  mask-image: url('/wishlist/cake.svg');
+  -webkit-mask-image: url('/wishlist/cake.svg');
+}
+
+.tree {
+  mask-image: url('/wishlist/tree.svg');
+  -webkit-mask-image: url('/wishlist/tree.svg');
+}
+
+.heart {
+  mask-image: url('/hero/heart.png');
+  -webkit-mask-image: url('/hero/heart.png');
+}
+
+.star {
+  mask-image: url('/gift/star.svg');
+  -webkit-mask-image: url('/gift/star.svg');
+}
+
+.gift {
+  mask-image: url('/gift/gift.svg');
+  -webkit-mask-image: url('/gift/gift.svg');
+}

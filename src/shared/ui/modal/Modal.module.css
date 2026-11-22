@@ -23,6 +23,18 @@
   filter: drop-shadow(0 0 24px rgb(124 77 255 / 45%));
 }
 
+.sm {
+  width: min(476px, 100%);
+}
+
+.lg {
+  width: min(640px, 100%);
+}
+
+.xl {
+  width: min(740px, 100%);
+}
+
 .card {
   display: flex;
   flex-direction: column;

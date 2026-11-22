@@ -1,0 +1,14 @@
+/* Двойной класс перебивает размер стандартной кнопки Dropdown независимо от порядка CSS. */
+.trigger.trigger {
+  width: 48px;
+  height: 48px;
+  color: var(--lavender);
+}
+
+.dots {
+  width: 14px;
+  height: 3px;
+  background-color: currentColor;
+  mask: url('/wishlist/more.svg') center / contain no-repeat;
+  -webkit-mask: url('/wishlist/more.svg') center / contain no-repeat;
+}

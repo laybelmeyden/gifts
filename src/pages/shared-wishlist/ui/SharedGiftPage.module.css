@@ -1,0 +1,462 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 32px 48px 48px;
+}
+
+/* Без сайдбара страница не должна растягиваться на весь широкий экран. */
+.standalone {
+  width: min(1128px, 100%);
+  margin: 0 auto;
+  padding-top: 24px;
+}
+
+.crumbs {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  min-width: 0;
+  color: var(--faint);
+  font-family: var(--font-text), monospace;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.back {
+  display: flex;
+  flex: 0 1 auto;
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+  color: var(--lilac);
+  text-decoration: none;
+}
+
+.back:hover {
+  opacity: 0.6;
+}
+
+.arrow {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  background-color: currentColor;
+  mask: url('/auth/arrow-left.png') center / contain no-repeat;
+  -webkit-mask: url('/auth/arrow-left.png') center / contain no-repeat;
+}
+
+/* Длинные названия обрезаются многоточием, иначе крошки на телефоне шире экрана. */
+.backText,
+.current {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.current {
+  color: var(--muted);
+}
+
+/* Если справа от фото не остаётся 320px под описание, оно переносится под фото. */
+.layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.preview {
+  display: grid;
+  flex: 0 1 460px;
+  place-items: center;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+:global(.px).preview {
+  --px-fill: #22183c;
+  --px-line: var(--line);
+}
+
+.preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cover {
+  width: 120px;
+  height: 120px;
+  background-color: var(--lilac);
+  mask: center / contain no-repeat;
+  -webkit-mask: center / contain no-repeat;
+}
+
+.gift {
+  mask-image: url('/gift/gift.svg');
+  -webkit-mask-image: url('/gift/gift.svg');
+}
+
+.star {
+  mask-image: url('/gift/star.svg');
+  -webkit-mask-image: url('/gift/star.svg');
+}
+
+.cover.heart {
+  mask-image: url('/hero/heart.png');
+  -webkit-mask-image: url('/hero/heart.png');
+}
+
+.info {
+  display: flex;
+  flex: 1 1 320px;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-start;
+  min-width: 0;
+  max-width: 580px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Капс JetBrains Mono сидит на 1px выше центра строки, поэтому сверху 2px, а иконки поднимаем. */
+.tag {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  height: 24px;
+  padding: 2px 8px 0;
+  border: 1px solid var(--line);
+  background: #221838;
+  color: var(--muted);
+  font-family: var(--font-text), monospace;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tag.free,
+.tag.received {
+  border-color: #2f7a5c;
+  background: #12302a;
+  color: #8ce0b8;
+}
+
+.tag.desire,
+.tag.mine {
+  border-color: #b0336e;
+  background: #3a1630;
+  color: #ff8cc0;
+}
+
+.hearts {
+  display: flex;
+  gap: 1px;
+  margin-top: -2px;
+}
+
+.pip {
+  width: 10px;
+  height: 9px;
+  background-color: #6b2a4c;
+  mask: url('/hero/heart.png') center / contain no-repeat;
+  -webkit-mask: url('/hero/heart.png') center / contain no-repeat;
+}
+
+.pipOn {
+  background-color: var(--pink);
+}
+
+.title {
+  margin: 0;
+  font-size: 40px;
+  line-height: 42px;
+  overflow-wrap: anywhere;
+  text-transform: uppercase;
+}
+
+.priceRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  align-items: center;
+}
+
+.price {
+  margin: 0;
+  color: var(--pink);
+  font-size: 56px;
+  line-height: 56px;
+}
+
+.open {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding-top: 2px;
+  color: var(--lilac);
+  font-family: var(--font-text), monospace;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 14px;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.open:hover {
+  opacity: 0.6;
+}
+
+.open > .icon {
+  margin-top: -2px;
+}
+
+.comment {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  align-self: stretch;
+  margin: 0;
+  padding: 16px 18px;
+  color: var(--ink);
+  font-family: var(--font-text), monospace;
+  font-size: 14px;
+  line-height: 21px;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+
+:global(.px).comment {
+  --px-fill: var(--bg);
+  --px-line: var(--lavender);
+}
+
+.comment > .heart {
+  flex: none;
+  width: 14px;
+  height: 13px;
+  margin-top: 4px;
+  background-color: var(--pink);
+  mask: url('/hero/heart.png') center / contain no-repeat;
+  -webkit-mask: url('/hero/heart.png') center / contain no-repeat;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  align-self: stretch;
+}
+
+.action {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 48px;
+  padding: 2px 20px 0;
+  font-family: var(--font-text), monospace;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+:global(.px).reserve {
+  --px-fill: var(--pink);
+  --px-line: var(--pink-border);
+  color: var(--bg);
+}
+
+:global(.px).chipIn {
+  --px-fill: var(--bg);
+  --px-line: var(--ink);
+  color: var(--ink);
+}
+
+.action:hover:not([aria-disabled='true']) {
+  opacity: 0.7;
+}
+
+.action > .icon {
+  width: 14px;
+  height: 14px;
+  margin-top: -2px;
+}
+
+.soon {
+  position: relative;
+  display: grid;
+}
+
+.soon > [aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.soon::after {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  z-index: 2;
+  padding: 7px 10px 6px;
+  border: 2px solid var(--lavender);
+  background: var(--raised);
+  color: var(--ink);
+  content: attr(data-tip);
+  font-family: var(--font-text), monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 4px);
+  transition:
+    opacity 0.15s,
+    transform 0.15s;
+}
+
+@media (hover: hover) {
+  .soon:hover::after,
+  .soon:focus-within::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.icon {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  background-color: currentColor;
+  mask: center / contain no-repeat;
+  -webkit-mask: center / contain no-repeat;
+}
+
+.linkIcon {
+  mask-image: url('/sidebar/link.png');
+  -webkit-mask-image: url('/sidebar/link.png');
+}
+
+.giftIcon {
+  mask-image: url('/gift/gift.svg');
+  -webkit-mask-image: url('/gift/gift.svg');
+}
+
+.friendsIcon {
+  mask-image: url('/sidebar/friends.png');
+  -webkit-mask-image: url('/sidebar/friends.png');
+}
+
+.lockIcon {
+  mask-image: url('/wishlist/lock.svg');
+  -webkit-mask-image: url('/wishlist/lock.svg');
+}
+
+.hint {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 0;
+  color: var(--faint);
+  font-family: var(--font-text), monospace;
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.hint > .icon {
+  margin-top: -1px;
+}
+
+.more {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.more h2 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-text), monospace;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(172px, 100%), 1fr));
+  gap: 12px;
+}
+
+.give.give {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 28px;
+  padding: 2px 8px 0;
+  border: 2px solid var(--pink-border);
+  background: var(--pink);
+  color: var(--bg);
+  font-family: var(--font-text), monospace;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.give:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 800px) {
+  .page {
+    gap: 20px;
+    padding: 24px 24px 32px;
+  }
+
+  .layout {
+    gap: 24px;
+  }
+
+  .title {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  .price {
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 20px 16px 28px;
+  }
+}

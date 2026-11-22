@@ -1,5 +1,7 @@
 export { Button, ButtonLink, type ButtonVariant } from './button/Button';
 export { Card } from './card/Card';
+export { ConfirmModal } from './confirm-modal/ConfirmModal';
+export { Dropdown, type DropdownItem } from './dropdown/Dropdown';
 export { HeartField } from './heart-field/HeartField';
 export { Input } from './input/Input';
 export { PasswordInput } from './input/PasswordInput';

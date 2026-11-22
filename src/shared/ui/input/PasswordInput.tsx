@@ -34,12 +34,7 @@ export function PasswordInput({ ...rest }: PasswordInputProps) {
 function Eye({ open }: { open: boolean }) {
   return (
     <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
-      <path
-        d="M1 9s3-5 8-5 8 5 8 5-3 5-8 5-8-5-8-5z"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-      />
+      <path d="M1 9s3-5 8-5 8 5 8 5-3 5-8 5-8-5-8-5z" fill="none" stroke="currentColor" strokeWidth="1.5" />
       <circle cx="9" cy="9" r="2" fill="currentColor" />
       {open && <path d="M3 15L15 3" stroke="currentColor" strokeWidth="1.5" />}
     </svg>

@@ -3,9 +3,7 @@
 import type { SessionUser } from '@contracts/user';
 import { createContext, use, useMemo, type ReactNode } from 'react';
 
-export type Session =
-  | { status: 'guest'; user: null }
-  | { status: 'authenticated'; user: SessionUser };
+export type Session = { status: 'guest'; user: null } | { status: 'authenticated'; user: SessionUser };
 
 const SessionContext = createContext<Session | null>(null);
 

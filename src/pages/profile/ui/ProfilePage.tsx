@@ -1,8 +1,8 @@
 'use client';
 
 import { t } from '@contracts/i18n';
-import { updateProfileSchema } from '@contracts/profile';
-import { updateProfile } from '@features/edit-profile';
+import { updateProfileSchema, type ProfileStats } from '@contracts/profile';
+import { updateProfile, updateUserProfile } from '@features/edit-profile';
 import { authClient, ApiError } from '@shared/api';
 import { routes } from '@shared/config';
 import { fieldErrors, formatHandleLevel, nickFromName, ruPlural, type FieldErrors } from '@shared/lib';
@@ -12,20 +12,28 @@ import { useState, type FormEvent } from 'react';
 import styles from './ProfilePage.module.css';
 
 type ProfilePageProps = {
+  /** Чужой профиль, который открыл админ: сохраняем через админский API и не показываем выход. */
+  userId?: string;
+  /** Домен текущего сайта, например gifts.app: из него строится ссылка на профиль. */
+  host: string;
   name: string;
   email: string;
   handle: string | null;
   birthday: string | null;
+  stats: ProfileStats;
 };
 
 const text = t.profile;
 const settingKeys = ['bookings', 'friends', 'mail', 'visibility'] as const;
 
 export function ProfilePage({
+  userId,
+  host,
   name: initialName,
   email: initialEmail,
   handle: initialHandle,
   birthday: initialBirthday,
+  stats: { lists, wishes, received },
 }: ProfilePageProps) {
   const router = useRouter();
   const showToast = useToast();
@@ -44,10 +52,6 @@ export function ProfilePage({
   });
   const nick = handle.trim() || nickFromName(name);
   const displayName = name.trim() || t.common.defaultName;
-  const lists = 0;
-  const wishes = 0;
-  const received = 0;
-
   async function leave() {
     setLeaving(true);
     try {
@@ -62,7 +66,7 @@ export function ProfilePage({
   }
 
   async function copyLink() {
-    const url = `gifts-plum-mu.vercel.app/${nick}`;
+    const url = `${location.origin}/${nick}`;
     try {
       await navigator.clipboard.writeText(url);
       showToast(text.linkCopied);
@@ -71,12 +75,13 @@ export function ProfilePage({
     }
   }
 
-  const leaveButton = (className: string) => (
-    <Button variant="link" className={`${styles.leave} ${className}`} loading={leaving} onClick={() => void leave()}>
-      <span className={styles.leaveIcon} aria-hidden="true" />
-      {text.signOut}
-    </Button>
-  );
+  const leaveButton = (className: string) =>
+    !userId && (
+      <Button variant="link" className={`${styles.leave} ${className}`} loading={leaving} onClick={() => void leave()}>
+        <span className={styles.leaveIcon} aria-hidden="true" />
+        {text.signOut}
+      </Button>
+    );
 
   async function save(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -93,7 +98,7 @@ export function ProfilePage({
     setErrors({});
     setSaving(true);
     try {
-      const saved = await updateProfile(parsed.data);
+      const saved = userId ? await updateUserProfile(userId, parsed.data) : await updateProfile(parsed.data);
       setName(saved.name);
       setHandle(saved.handle ?? parsed.data.handle);
       setEmail(saved.email);
@@ -139,13 +144,10 @@ export function ProfilePage({
           </div>
           <div className={`px ${styles.linkRow}`}>
             <div className={styles.linkIcon} aria-hidden="true" />
-            <div className={styles.linkText}>gifts.app/{nick}</div>
-            <button
-              className={styles.copy}
-              type="button"
-              aria-label={text.copyLink}
-              onClick={() => void copyLink()}
-            >
+            <div className={styles.linkText}>
+              {host}/{nick}
+            </div>
+            <button className={styles.copy} type="button" aria-label={text.copyLink} onClick={() => void copyLink()}>
               <div className={styles.copyIcon} aria-hidden="true" />
             </button>
           </div>

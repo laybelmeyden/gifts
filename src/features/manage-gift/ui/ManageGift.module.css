@@ -1,0 +1,141 @@
+.icon {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  background-color: currentColor;
+  mask: center / contain no-repeat;
+  -webkit-mask: center / contain no-repeat;
+}
+
+.camera {
+  mask-image: url('/gift/camera.svg');
+  -webkit-mask-image: url('/gift/camera.svg');
+}
+
+.check {
+  mask-image: url('/gift/check.svg');
+  -webkit-mask-image: url('/gift/check.svg');
+}
+
+.trash {
+  mask-image: url('/gift/trash.svg');
+  -webkit-mask-image: url('/gift/trash.svg');
+}
+
+.file {
+  display: none;
+}
+
+.photo {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  height: 30px;
+  padding: 0 12px;
+  color: var(--ink);
+  font-family: var(--font-text), monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+:global(.px).photo {
+  --px-fill: var(--bg);
+  --px-line: var(--ink);
+}
+
+.soon {
+  position: relative;
+  display: grid;
+}
+
+.soon > [aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Кнопка стоит у правого края превью с overflow: hidden, поэтому подсказку прижимаем вправо. */
+.soon::after {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 8px);
+  z-index: 2;
+  padding: 7px 10px 6px;
+  border: 2px solid var(--lavender);
+  background: var(--raised);
+  color: var(--ink);
+  content: attr(data-tip);
+  font-family: var(--font-text), monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+  transition:
+    opacity 0.15s,
+    transform 0.15s;
+}
+
+@media (hover: hover) {
+  .soon:hover::after,
+  .soon:focus-within::after {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Двойной класс перебивает базовые размеры Button независимо от порядка CSS. */
+.action.action {
+  gap: 8px;
+  height: 48px;
+  padding: 2px 20px 0;
+  font-family: var(--font-text), monospace;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+}
+
+.action > .icon,
+.delete > .icon {
+  width: 14px;
+  height: 14px;
+  margin-top: -2px;
+}
+
+.action.received {
+  --btn-fill: var(--accent);
+  --btn-line: var(--lilac);
+}
+
+.action.received.receivedOn {
+  --btn-fill: #12302a;
+  --btn-line: #2f7a5c;
+  color: #8ce0b8;
+}
+
+.delete {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  height: 48px;
+  padding: 2px 8px 0;
+  border: 0;
+  background: none;
+  color: var(--lilac);
+  font-family: var(--font-text), monospace;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.delete:hover {
+  color: var(--err);
+}

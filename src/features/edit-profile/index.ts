@@ -1,1 +1,1 @@
-export { updateProfile } from './api/update-profile';
+export { updateProfile, updateUserProfile } from './api/update-profile';

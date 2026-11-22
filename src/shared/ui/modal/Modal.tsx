@@ -11,19 +11,26 @@ type ModalProps = {
   /** Ключ модалки в UiProvider: открыта, когда activeModal совпадает с name. */
   name: string;
   title: string;
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   className?: string;
   children: ReactNode;
 };
 
-export function Modal({ name, title, className, children }: ModalProps) {
+export function Modal({ name, title, size = 'md', className, children }: ModalProps) {
   const { activeModal, closeModal } = useModal();
   const titleId = useId();
   if (activeModal !== name) return null;
 
   return createPortal(
     <div className={styles.modal}>
-      <button className={styles.backdrop} type="button" tabIndex={-1} aria-label={t.common.close} onClick={closeModal} />
-      <div className={styles.glow}>
+      <button
+        className={styles.backdrop}
+        type="button"
+        tabIndex={-1}
+        aria-label={t.common.close}
+        onClick={closeModal}
+      />
+      <div className={cx(styles.glow, size !== 'md' && styles[size])}>
         <div className={cx('px', styles.card, className)} role="dialog" aria-modal="true" aria-labelledby={titleId}>
           <header className={styles.head}>
             <h2 id={titleId} className={styles.title}>
