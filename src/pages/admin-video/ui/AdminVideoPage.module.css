@@ -1,0 +1,111 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  height: 100%;
+  min-height: 100%;
+  padding: 36px 48px 48px;
+}
+
+.page h1 {
+  margin: 0;
+  font-size: 36px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 2px 12px 0;
+  color: var(--lavender);
+  font-family: var(--font-text), monospace;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+:global(.px).chip {
+  --px-fill: var(--card);
+  --px-line: var(--line);
+}
+
+:global(.px).chip.chipOn {
+  --px-fill: var(--accent);
+  --px-line: var(--lilac);
+  color: var(--ink);
+}
+
+.chip > span {
+  margin-top: -6px;
+}
+
+.chip:hover:not(.chipOn) {
+  opacity: 0.7;
+}
+
+.grid {
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-columns: repeat(auto-fill, minmax(279px, 1fr));
+  grid-auto-rows: minmax(240px, auto);
+  gap: 14px;
+  align-content: start;
+  align-items: stretch;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.stack {
+  height: auto;
+}
+
+.stack .grid {
+  flex: none;
+  overflow: visible;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.empty h2 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+@media (max-width: 800px) {
+  .page {
+    height: auto;
+    gap: 20px;
+    padding: 24px 24px 32px;
+  }
+
+  .page h1 {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  .grid {
+    flex: none;
+    overflow: visible;
+  }
+}

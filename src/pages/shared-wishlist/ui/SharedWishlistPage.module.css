@@ -2,13 +2,16 @@
   display: flex;
   flex-direction: column;
   gap: 28px;
-  min-height: 100vh;
+  height: 100%;
+  min-height: 100%;
   padding: 32px 48px 48px;
 }
 
 /* Без сайдбара страница не должна растягиваться на весь широкий экран. */
 .standalone {
   width: min(1128px, 100%);
+  height: auto;
+  min-height: 100dvh;
   margin: 0 auto;
   padding-top: 24px;
 }
@@ -200,8 +203,21 @@
 
 .grid {
   display: grid;
+  flex: 1 1 auto;
   grid-template-columns: repeat(auto-fill, minmax(min(172px, 100%), 1fr));
   gap: 12px;
+  align-content: start;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.stack {
+  height: auto;
+}
+
+.stack .grid {
+  flex: none;
+  overflow: visible;
 }
 
 /* Двойной класс перебивает .px карточки, у кнопки своя заливка. */
@@ -261,8 +277,8 @@
 
 @media (max-width: 800px) {
   .page {
+    height: auto;
     gap: 20px;
-    min-height: auto;
     padding: 24px 24px 32px;
   }
 

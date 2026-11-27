@@ -29,7 +29,7 @@ const giftColumns = sql`
   g."received_at" is not null as "received"
 `;
 
-export async function getWishlist(ownerId: string, wishlistId: string): Promise<WishlistDetail | null> {
+async function loadWishlist(wishlistId: string, ownerId: string | null): Promise<WishlistDetail | null> {
   if (!UUID.test(wishlistId)) return null;
 
   const lists = await db.execute<Omit<WishlistDetail, 'gifts'>>(sql`
@@ -39,7 +39,7 @@ export async function getWishlist(ownerId: string, wishlistId: string): Promise<
       (select count(*)::int from "reservations" r join "gifts" g on g."id" = r."gift_id"
         where g."wishlist_id" = w."id") as "bookedCount"
     from "wishlists" w
-    where w."id" = ${wishlistId} and w."owner_id" = ${ownerId}
+    where w."id" = ${wishlistId} ${ownerId ? sql`and w."owner_id" = ${ownerId}` : sql``}
   `);
   const list = lists.rows[0];
   if (!list) return null;
@@ -52,6 +52,15 @@ export async function getWishlist(ownerId: string, wishlistId: string): Promise<
     order by g."created_at" desc
   `);
   return { ...list, gifts: gifts.rows };
+}
+
+export function getWishlist(ownerId: string, wishlistId: string): Promise<WishlistDetail | null> {
+  return loadWishlist(wishlistId, ownerId);
+}
+
+/** Любой вишлист по id — только для админки (ролики, просмотр чужого списка). */
+export function getWishlistById(wishlistId: string): Promise<WishlistDetail | null> {
+  return loadWishlist(wishlistId, null);
 }
 
 /**

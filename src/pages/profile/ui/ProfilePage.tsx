@@ -14,7 +14,7 @@ import styles from './ProfilePage.module.css';
 type ProfilePageProps = {
   /** Чужой профиль, который открыл админ: сохраняем через админский API и не показываем выход. */
   userId?: string;
-  /** Домен текущего сайта, например gifts.app: из него строится ссылка на профиль. */
+  /** Домен текущего сайта, например pixelgifts.ru: из него строится ссылка на профиль. */
   host: string;
   name: string;
   email: string;

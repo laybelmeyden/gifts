@@ -8,6 +8,24 @@
   padding: 24px;
 }
 
+.embed {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  min-height: 0;
+  gap: 20px;
+  padding: 16px;
+  background: rgb(7 4 13 / 72%);
+}
+
+.embed .heart {
+  width: 80px;
+}
+
+.embed .text {
+  font-size: 22px;
+}
+
 .text {
   margin: 0;
   color: var(--ink);

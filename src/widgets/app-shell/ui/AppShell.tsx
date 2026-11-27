@@ -23,15 +23,18 @@ const nav: NavItem[] = [
   { key: 'profile', href: routes.profile, label: t.nav.profile, icon: 'user' },
 ];
 
-const adminItem: NavItem = { href: routes.admin, label: t.nav.admin, icon: 'admin' };
-
-const tabs: (NavItem | 'create')[] = [
-  { key: 'lists', href: routes.myList, label: t.nav.tabs.lists, icon: 'list' },
-  { key: 'friends', label: t.nav.tabs.friends, icon: 'friends' },
-  'create',
-  { key: 'giving', href: routes.giving, label: t.nav.tabs.giving, icon: 'gift' },
-  { key: 'profile', href: routes.profile, label: t.nav.tabs.profile, icon: 'user' },
+const staffNav: NavItem[] = [
+  { href: routes.admin, label: t.nav.admin, icon: 'admin' },
+  { href: routes.adminVideo, label: t.nav.video, icon: 'video' },
 ];
+
+function pathActive(pathname: string | null, href?: string) {
+  return !!href && (pathname === href || !!pathname?.startsWith(`${href}/`));
+}
+
+function tabCaption(item: NavItem) {
+  return item.key ? t.nav.tabs[item.key] : item.label;
+}
 
 type AppShellProps = {
   hiddenNav: NavKey[];
@@ -45,6 +48,12 @@ export function AppShell({ hiddenNav, counts, children }: AppShellProps) {
   const { openModal } = useModal();
   const pathname = usePathname();
   const [overrides, setOverrides] = useState<Partial<Record<NavKey, boolean>>>({});
+  const [moreOpen, setMoreOpen] = useState(false);
+  const [openedOn, setOpenedOn] = useState(pathname);
+  if (openedOn !== pathname) {
+    setOpenedOn(pathname);
+    setMoreOpen(false);
+  }
   const user = session.status === 'authenticated' ? session.user : null;
   const isAdmin = user?.role === 'admin';
   const name = user?.name?.trim() || t.common.defaultName;
@@ -52,9 +61,50 @@ export function AppShell({ hiddenNav, counts, children }: AppShellProps) {
   const later = () => showToast(t.common.soon);
   const isHidden = (key?: NavKey) => !!key && (overrides[key] ?? hiddenNav.includes(key));
   const shown = (item: NavItem) => isAdmin || !isHidden(item.key);
-  const items = isAdmin ? [...nav, adminItem] : nav.filter(shown);
-  const visibleTabs = tabs.filter((item) => item === 'create' || shown(item));
+  const items = isAdmin ? [...nav, ...staffNav] : nav.filter(shown);
+  const extraNav = [
+    ...nav.filter((item) => (item.key === 'friends' || item.key === 'calendar') && shown(item)),
+    ...(isAdmin ? staffNav : []),
+  ];
+  const tabByKey = (key: NavKey) => nav.find((item) => item.key === key && shown(item)) ?? null;
+  const tabBar: (NavItem | 'create' | 'more' | null)[] = [
+    tabByKey('lists'),
+    tabByKey('giving'),
+    'create',
+    tabByKey('profile'),
+    extraNav.length > 0 ? 'more' : null,
+  ];
+  const moreActive = extraNav.some((item) => pathActive(pathname, item.href));
   const setVisible = (key: NavKey, visible: boolean) => setOverrides((current) => ({ ...current, [key]: !visible }));
+
+  function navControl(item: NavItem, className: string, label: string, onPick?: () => void, withCount = false) {
+    const content = (
+      <>
+        <span className={`${styles.icon} ${styles[item.icon]}`} aria-hidden="true" />
+        {label}
+        {withCount && !!item.key && !!counts[item.key] && <span className={styles.count}>{counts[item.key]}</span>}
+      </>
+    );
+    if (item.href) {
+      return (
+        <Link className={className} href={item.href} onClick={onPick}>
+          {content}
+        </Link>
+      );
+    }
+    return (
+      <button
+        className={className}
+        type="button"
+        onClick={() => {
+          onPick?.();
+          later();
+        }}
+      >
+        {content}
+      </button>
+    );
+  }
 
   return (
     <div className={styles.shell}>
@@ -62,7 +112,7 @@ export function AppShell({ hiddenNav, counts, children }: AppShellProps) {
         <Logo className={styles.brand} href={routes.myList} />
         <nav className={styles.nav} aria-label={t.nav.label}>
           {items.map((item) => {
-            const active = !!item.href && (pathname === item.href || pathname?.startsWith(`${item.href}/`));
+            const active = pathActive(pathname, item.href);
             const className = cx(
               active && 'px',
               styles.item,
@@ -70,26 +120,9 @@ export function AppShell({ hiddenNav, counts, children }: AppShellProps) {
               isHidden(item.key) && styles.muted,
               isAdmin && item.key && styles.withEye,
             );
-            const count = item.key ? counts[item.key] : undefined;
-            const content = (
-              <>
-                <span className={`${styles.icon} ${styles[item.icon]}`} aria-hidden="true" />
-                {item.label}
-                {!!count && <span className={styles.count}>{count}</span>}
-              </>
-            );
-            const link = item.href ? (
-              <Link className={className} href={item.href}>
-                {content}
-              </Link>
-            ) : (
-              <button className={className} type="button" onClick={later}>
-                {content}
-              </button>
-            );
             return (
               <div key={item.label} className={styles.navRow}>
-                {link}
+                {navControl(item, className, item.label, undefined, true)}
                 {isAdmin && item.key && (
                   <NavVisibilityToggle
                     className={styles.eye}
@@ -103,18 +136,20 @@ export function AppShell({ hiddenNav, counts, children }: AppShellProps) {
             );
           })}
         </nav>
-        <CreateWishlistButton className={styles.create} variant="pink">
-          <span className={styles.plus} aria-hidden="true" />
-          {t.nav.newList}
-        </CreateWishlistButton>
-        <div className={styles.me}>
-          <Link className={`px ${styles.avatar}`} href={routes.profile} aria-label={t.nav.profile}>
-            {name.slice(0, 1).toUpperCase()}
-          </Link>
-          <span className={styles.who}>
-            <strong>{name}</strong>
-            <small>{handle}</small>
-          </span>
+        <div className={styles.dock}>
+          <CreateWishlistButton className={styles.create} variant="pink">
+            <span className={styles.plus} aria-hidden="true" />
+            {t.nav.newList}
+          </CreateWishlistButton>
+          <div className={styles.me}>
+            <Link className={`px ${styles.avatar}`} href={routes.profile} aria-label={t.nav.profile}>
+              {name.slice(0, 1).toUpperCase()}
+            </Link>
+            <span className={styles.who}>
+              <strong>{name}</strong>
+              <small>{handle}</small>
+            </span>
+          </div>
         </div>
       </aside>
       <div className={`${styles.main} starfield`}>
@@ -125,41 +160,71 @@ export function AppShell({ hiddenNav, counts, children }: AppShellProps) {
         )}
         {children}
       </div>
-      <nav
-        className={styles.tabs}
-        style={{ gridTemplateColumns: `repeat(${visibleTabs.length}, minmax(0, 1fr))` }}
-        aria-label={t.nav.label}
-      >
-        {visibleTabs.map((item) => {
+      {moreOpen && (
+        <button
+          className={styles.moreBackdrop}
+          type="button"
+          aria-label={t.common.close}
+          onClick={() => setMoreOpen(false)}
+        />
+      )}
+      <nav className={styles.tabs} aria-label={t.nav.label}>
+        {moreOpen && extraNav.length > 0 && (
+          <div className={cx('px', styles.moreSheet)} role="menu" aria-label={t.nav.tabs.more}>
+            {extraNav.map((item) => {
+              const active = pathActive(pathname, item.href);
+              return (
+                <div key={item.label} role="none">
+                  {navControl(
+                    item,
+                    cx(styles.moreItem, active && styles.moreItemActive, isHidden(item.key) && styles.muted),
+                    item.label,
+                    () => setMoreOpen(false),
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
+        {tabBar.map((item, index) => {
+          if (item === null) {
+            return <span key={`empty-${index}`} className={styles.tabEmpty} />;
+          }
           if (item === 'create') {
             return (
-              <button
-                key={item}
-                className={styles.tabCreate}
-                type="button"
-                aria-label={t.nav.newList}
-                onClick={() => openModal(CREATE_WISHLIST_MODAL)}
-              >
-                <span className={styles.tabPlus} aria-hidden="true" />
-              </button>
+              <span key={item} className={styles.tabSlot}>
+                <button
+                  className={styles.tabCreate}
+                  type="button"
+                  aria-label={t.nav.newList}
+                  onClick={() => openModal(CREATE_WISHLIST_MODAL)}
+                >
+                  <span className={styles.tabPlus} aria-hidden="true" />
+                </button>
+              </span>
             );
           }
-          const active = !!item.href && pathname === item.href;
-          const className = cx(styles.tab, active && styles.tabActive, isHidden(item.key) && styles.muted);
-          const content = (
-            <>
-              <span className={`${styles.icon} ${styles[item.icon]}`} aria-hidden="true" />
-              {item.label}
-            </>
-          );
-          return item.href ? (
-            <Link key={item.label} className={className} href={item.href} aria-current={active ? 'page' : undefined}>
-              {content}
-            </Link>
-          ) : (
-            <button key={item.label} className={className} type="button" onClick={later}>
-              {content}
-            </button>
+          if (item === 'more') {
+            return (
+              <span key={item} className={styles.tabSlot}>
+                <button
+                  className={cx(styles.tab, (moreOpen || moreActive) && styles.tabActive)}
+                  type="button"
+                  aria-expanded={moreOpen}
+                  aria-haspopup="menu"
+                  onClick={() => setMoreOpen((open) => !open)}
+                >
+                  <span className={`${styles.icon} ${styles.more}`} aria-hidden="true" />
+                  {t.nav.tabs.more}
+                </button>
+              </span>
+            );
+          }
+          const active = pathActive(pathname, item.href);
+          return (
+            <span key={item.label} className={styles.tabSlot}>
+              {navControl(item, cx(styles.tab, active && styles.tabActive), tabCaption(item))}
+            </span>
           );
         })}
       </nav>

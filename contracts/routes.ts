@@ -15,6 +15,8 @@ export const routes = {
   profile: '/profile',
   userList: (userId: string) => `/u/${encodeURIComponent(userId)}`,
   admin: '/admin',
+  adminVideo: '/video',
+  adminWishlistVideo: (wishlistId: string) => `/video/${encodeURIComponent(wishlistId)}`,
   adminUser: (userId: string) => `/admin/users/${encodeURIComponent(userId)}`,
   adminLists: (userId: string) => `/admin/users/${encodeURIComponent(userId)}/lists`,
   adminWishlist: (userId: string, wishlistId: string) =>

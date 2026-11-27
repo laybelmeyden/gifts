@@ -19,7 +19,7 @@ const extraOrigins = [process.env.VERCEL_URL, process.env.VERCEL_BRANCH_URL]
   .map((host) => `https://${host}`);
 
 export const auth = betterAuth({
-  appName: 'Gifts',
+  appName: 'PixelGifts',
   baseURL: resolveBaseUrl(),
   trustedOrigins: extraOrigins,
   database: drizzleAdapter(db, { provider: 'pg', schema }),

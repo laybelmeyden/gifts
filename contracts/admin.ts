@@ -3,6 +3,7 @@ import { nameSchema, passwordSchema } from './auth';
 import { t } from './i18n';
 import { handleSchema } from './profile';
 import type { UserRole } from './user';
+import type { WishlistSummary } from './wishlist';
 
 export type AdminUser = {
   id: string;
@@ -23,6 +24,12 @@ export type AdminGift = {
   title: string;
   price: string | null;
   imageUrl: string | null;
+};
+
+/** Вишлист в админском списке для роликов: кто хозяин и сколько подарков. */
+export type AdminWishlist = WishlistSummary & {
+  ownerId: string;
+  ownerName: string;
 };
 
 export const setUserPasswordSchema = z.object({

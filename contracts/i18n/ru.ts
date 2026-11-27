@@ -2,9 +2,10 @@ import type { PluralForms } from './types';
 
 export const ru = {
   meta: {
+    siteName: 'PixelGifts',
     description: 'Список подарков твоей мечты',
     lead: 'Собери вишлист, поделись ссылкой - друзья выберут подарок и забронируют его, чтобы подарки не повторились',
-    imageAlt: 'Gifts - список подарков твоей мечты',
+    imageAlt: 'PixelGifts - список подарков твоей мечты',
     share: {
       wishlist: (owner: string, gifts: string) =>
         `${owner} делится вишлистом${gifts ? `: ${gifts}` : ''}. Выбери, что подарить, и забронируй - так подарки не повторятся`,
@@ -21,11 +22,13 @@ export const ru = {
       reserved: 'подарок твой',
       board: 'список подарков',
       rules: 'пользовательское соглашение',
+      video: 'видео для тикток',
       notFound: 'страница не найдена',
     },
   },
 
   common: {
+    brand: 'PIXELGIFTS',
     toHome: 'На главную',
     signIn: 'Войти',
     signOut: 'Выйти',
@@ -36,6 +39,10 @@ export const ru = {
     networkError: 'Нет сети или сервер недоступен',
     serverError: 'Сервер ответил ошибкой. Попробуйте ещё раз',
     handleLevel: (handle: string, level: number) => `@${handle} · LV ${level}`,
+    pager: 'Страницы',
+    page: (n: number) => `Страница ${n}`,
+    prevPage: 'Предыдущая страница',
+    nextPage: 'Следующая страница',
   },
 
   fields: {
@@ -59,6 +66,7 @@ export const ru = {
     calendar: 'Календарь',
     profile: 'Профиль',
     admin: 'Админка',
+    video: 'Видео',
     newList: 'Новый вишлист',
     visibility: {
       show: (label: string) => `Показать «${label}» всем`,
@@ -70,7 +78,9 @@ export const ru = {
       lists: 'Вишлисты',
       friends: 'Друзья',
       giving: 'Я дарю',
+      calendar: 'Календарь',
       profile: 'Профиль',
+      more: 'Ещё',
     },
   },
 
@@ -221,6 +231,34 @@ export const ru = {
     },
     inside: 'вишлист внутри',
     download: 'Скачать открытку',
+  },
+
+  video: {
+    back: 'К вишлистам',
+    breadcrumbs: 'Навигация',
+    title: 'Видео для ТикТок',
+    listsEmpty: 'Пока нет вишлистов',
+    filters: 'Фильтр по поводу',
+    lead: 'Превью крутится само. Скачай вертикальный ролик 9:16 и наложи музыку уже в ТикТоке.',
+    hooks: 'Хук в начале',
+    hook: {
+      guess: 'Хватит угадывать подарки',
+      instead: 'Отправь ссылку вместо «мне всё равно»',
+      newyear: 'Новый год без носков',
+      book: 'Забронируй, чтобы не купили дважды',
+      thirty: 'Вишлист за 30 секунд',
+    },
+    download: 'Скачать видео',
+    recording: 'Пишем ролик',
+    empty: 'Сначала добавь хотя бы один подарок',
+    unsupported: 'Этот браузер не умеет записывать видео. Открой Chrome или Edge',
+    failed: 'Не получилось записать видео. Попробуй ещё раз',
+    done: 'Видео скачалось. Залей его в ТикТок и добавь музыку',
+    gifts: ['подарок', 'подарка', 'подарков'] as PluralForms,
+    giftsUsed: (count: number, word: string) => `В ролике ${count} ${word}`,
+    giftsCap: 'В ролике первые 6 подарков',
+    cta: 'Собери свой вишлист',
+    want: 'хочу это',
   },
 
   gift: {

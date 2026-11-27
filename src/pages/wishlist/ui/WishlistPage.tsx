@@ -9,11 +9,12 @@ import { CoverIcon, coverTone } from '@entities/wishlist';
 import { AddGiftButton, AddGiftModal } from '@features/add-gift';
 import { WishlistMenu } from '@features/delete-wishlist';
 import { ShareWishlist } from '@features/share-wishlist';
-import { routes } from '@shared/config';
-import { cx, ruPlural } from '@shared/lib';
+import { TILE, WISHLIST_STACK_PAGE_SIZE, routes } from '@shared/config';
+import { cx, ruPlural, useFitPageSize, usePaged } from '@shared/lib';
+import { FitGrid, Pagination } from '@shared/ui';
 import { HeroScene } from '@widgets/hero-scene';
 import Link from 'next/link';
-import { useState, type CSSProperties } from 'react';
+import { useRef, useState, type CSSProperties } from 'react';
 import styles from './WishlistPage.module.css';
 
 const text = t.wishlist;
@@ -36,6 +37,10 @@ type WishlistPageProps = {
 
 export function WishlistPage({ list, managedUser }: WishlistPageProps) {
   const [filter, setFilter] = useState<GiftCategory | 'all'>('all');
+  const gridRef = useRef<HTMLDivElement>(null);
+  const { pageSize, columns } = useFitPageSize(gridRef, TILE.giftRow, {
+    singleColumnPageSize: WISHLIST_STACK_PAGE_SIZE,
+  });
   const listsHref = managedUser ? routes.adminLists(managedUser.id) : routes.myList;
   const giftHref = (giftId: string) =>
     managedUser ? routes.adminGift(managedUser.id, list.id, giftId) : routes.gift(list.id, giftId);
@@ -46,12 +51,13 @@ export function WishlistPage({ list, managedUser }: WishlistPageProps) {
   })).filter((item) => item.count > 0);
   const active = filter !== 'all' && !categories.some((item) => item.category === filter) ? 'all' : filter;
   const shown = active === 'all' ? list.gifts : list.gifts.filter((gift) => gift.category === active);
+  const paged = usePaged(shown, pageSize, active);
 
   const total = list.gifts.length;
   const booked = Math.min(list.bookedCount, total);
 
   return (
-    <section className={styles.page}>
+    <section className={cx(styles.page, columns <= 1 && styles.stack)}>
       <nav className={styles.crumbs} aria-label={text.breadcrumbs}>
         <Link className={styles.back} href={listsHref}>
           <span className={styles.arrow} aria-hidden="true" />
@@ -132,11 +138,12 @@ export function WishlistPage({ list, managedUser }: WishlistPageProps) {
             </div>
           </div>
 
-          <div className={styles.grid}>
-            {shown.map((gift) => (
+          <FitGrid ready={pageSize != null} flow={columns <= 1} gridRef={gridRef} className={styles.grid}>
+            {paged.items.map((gift) => (
               <GiftRow key={gift.id} gift={gift} href={giftHref(gift.id)} />
             ))}
-          </div>
+          </FitGrid>
+          <Pagination page={paged.page} pageCount={pageSize == null ? 1 : paged.pageCount} onPage={paged.setPage} />
         </>
       ) : (
         <div className={styles.empty}>

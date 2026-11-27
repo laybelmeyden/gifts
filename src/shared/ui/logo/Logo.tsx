@@ -1,3 +1,4 @@
+import { t } from '@contracts/i18n';
 import { routes } from '@contracts/routes';
 import Link from 'next/link';
 import { cx } from '../../lib';
@@ -8,7 +9,7 @@ export function Logo({ className, href = routes.home }: { className?: string; hr
   return (
     <Link href={href} className={cx(styles.logo, className)}>
       <PixelHeart className={styles.heart} />
-      GIFTS
+      {t.common.brand}
     </Link>
   );
 }

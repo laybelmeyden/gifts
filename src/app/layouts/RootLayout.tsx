@@ -12,7 +12,7 @@ function siteUrl() {
   return 'http://localhost:3000';
 }
 
-const SITE_NAME = 'Gifts';
+const SITE_NAME = t.meta.siteName;
 
 /** Картинку рисует `app/opengraph-image.tsx`; сюда она не подтягивается сама, если страница задаёт свой openGraph. */
 const SHARE_IMAGE = { url: '/opengraph-image', width: 1200, height: 630, alt: t.meta.imageAlt, type: 'image/png' };

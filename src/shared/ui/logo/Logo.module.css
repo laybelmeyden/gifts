@@ -4,10 +4,10 @@
   align-items: center;
   color: var(--ink);
   font-family: var(--font-pixel), 'Comic Sans MS', sans-serif;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 400;
   line-height: 1;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   text-decoration: none;
 }
 

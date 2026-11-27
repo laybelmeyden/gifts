@@ -3,14 +3,15 @@
   z-index: 1;
   display: grid;
   grid-template-columns: 264px 1fr;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .side {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
+  min-height: 0;
   padding: 28px 25px 24px;
   border-right: 2px solid rgb(74 55 117 / 55%);
   background: rgb(14 8 25 / 92%);
@@ -22,10 +23,17 @@
 
 .nav {
   display: flex;
+  flex: 0 1 auto;
   flex-direction: column;
   gap: 8px;
   width: 214px;
+  min-height: 0;
+  max-height: 700px;
   margin-top: 40px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(124 77 255 / 55%) transparent;
 }
 
 .item {
@@ -127,6 +135,18 @@
   -webkit-mask-image: url('/sidebar/admin.svg');
 }
 
+.video {
+  mask-image: url('/sidebar/video.svg');
+  -webkit-mask-image: url('/sidebar/video.svg');
+}
+
+.more {
+  mask-image: url('/wishlist/more.svg');
+  -webkit-mask-image: url('/wishlist/more.svg');
+  mask-size: 18px 4px;
+  -webkit-mask-size: 18px 4px;
+}
+
 .count {
   margin-left: auto;
   color: var(--muted);
@@ -141,11 +161,21 @@
   color: var(--lavender);
 }
 
+.dock {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: 16px;
+  width: 214px;
+  margin-top: auto;
+  padding-top: 16px;
+  background: rgb(14 8 25 / 92%);
+}
+
 .side .create {
   --btn-fill: #ff7ab6;
   --btn-line: #fff;
   width: 214px;
-  margin-top: auto;
   color: var(--bg);
   font-size: 16px;
 }
@@ -164,7 +194,6 @@
   gap: 12px;
   align-items: center;
   width: 214px;
-  margin-top: 16px;
 }
 
 .avatar {
@@ -230,6 +259,10 @@
 
 .main {
   min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(124 77 255 / 70%) var(--raised);
 }
 
 .mobileBar,
@@ -239,7 +272,13 @@
 
 @media (max-width: 800px) {
   .shell {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: none;
+    height: 100dvh;
+    max-height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
   }
 
   .side {
@@ -254,22 +293,93 @@
   }
 
   .main {
-    padding-bottom: calc(96px + env(safe-area-inset-bottom));
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 16px;
   }
 
   .tabs {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    position: relative;
     z-index: 5;
     display: grid;
+    flex: none;
     grid-template-columns: repeat(5, minmax(0, 1fr));
     align-items: center;
     height: calc(72px + env(safe-area-inset-bottom));
-    padding: 0 4px env(safe-area-inset-bottom);
+    padding: 0 8px env(safe-area-inset-bottom);
     border-top: 2px solid #2c2045;
     background: rgb(14 8 25 / 92%);
+  }
+
+  .tabSlot {
+    display: grid;
+    place-items: center;
+    min-width: 0;
+  }
+
+  .tabEmpty {
+    min-width: 0;
+  }
+
+  .moreBackdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 4;
+    border: 0;
+    background: rgb(7 4 13 / 55%);
+    cursor: pointer;
+  }
+
+  .moreSheet {
+    position: absolute;
+    right: 8px;
+    bottom: calc(100% + 10px);
+    left: 8px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px;
+  }
+
+  :global(.px).moreSheet {
+    --px-fill: rgb(14 8 25 / 96%);
+    --px-line: var(--lilac);
+  }
+
+  .moreItem {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    width: 100%;
+    height: 48px;
+    padding: 2px 14px 0;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    font: inherit;
+    font-family: var(--font-text), monospace;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .moreItem .icon {
+    background-color: var(--muted);
+  }
+
+  .moreItemActive {
+    color: var(--ink);
+    background: rgb(124 77 255 / 22%);
+  }
+
+  .moreItemActive .icon {
+    background-color: #ff7ab6;
   }
 
   .tab {
@@ -278,6 +388,7 @@
     flex-direction: column;
     gap: 8px;
     align-items: center;
+    width: 100%;
     min-width: 0;
     padding: 0;
     border: 0;
@@ -317,7 +428,6 @@
   }
 
   .tabCreate {
-    justify-self: center;
     display: grid;
     place-items: center;
     width: 44px;
@@ -338,7 +448,8 @@
   }
 
   .tab:hover,
-  .tabCreate:hover {
+  .tabCreate:hover,
+  .moreItem:hover {
     opacity: 0.5;
   }
 }

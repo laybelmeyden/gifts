@@ -1,0 +1,57 @@
+.pager {
+  display: flex;
+  flex: none;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  margin-top: auto;
+}
+
+.btn {
+  display: grid;
+  place-items: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 2px 10px 0;
+  color: var(--lavender);
+  font-family: var(--font-text), monospace;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+:global(.px).btn {
+  --px-fill: var(--card);
+  --px-line: var(--line);
+}
+
+:global(.px).btn.on {
+  --px-fill: var(--accent);
+  --px-line: var(--lilac);
+  color: var(--ink);
+}
+
+.btn:hover:not(:disabled):not(.on) {
+  opacity: 0.7;
+}
+
+.btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.arrow {
+  width: 12px;
+  height: 12px;
+  background-color: currentColor;
+  mask: url('/auth/arrow-left.png') center / contain no-repeat;
+  -webkit-mask: url('/auth/arrow-left.png') center / contain no-repeat;
+}
+
+.next {
+  transform: scaleX(-1);
+}

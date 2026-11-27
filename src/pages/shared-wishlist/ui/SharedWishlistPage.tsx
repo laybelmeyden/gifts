@@ -4,10 +4,11 @@ import { t } from '@contracts/i18n';
 import type { SharedGift, SharedWishlist } from '@contracts/reservation';
 import { GiftCard, priceValue } from '@entities/gift';
 import { ReserveGift } from '@features/reserve-gift';
-import { routes } from '@shared/config';
-import { cx, ruPlural } from '@shared/lib';
+import { TILE, WISHLIST_STACK_PAGE_SIZE, routes } from '@shared/config';
+import { cx, ruPlural, useFitPageSize, usePaged } from '@shared/lib';
+import { FitGrid, Pagination } from '@shared/ui';
 import { HeroScene } from '@widgets/hero-scene';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { GuestBar } from './GuestBar';
 import styles from './SharedWishlistPage.module.css';
 
@@ -36,7 +37,12 @@ type SharedWishlistPageProps = {
 
 export function SharedWishlistPage({ list, standalone = false }: SharedWishlistPageProps) {
   const [filter, setFilter] = useState<Filter>('all');
+  const gridRef = useRef<HTMLDivElement>(null);
+  const { pageSize, columns } = useFitPageSize(gridRef, TILE.giftCard, {
+    singleColumnPageSize: WISHLIST_STACK_PAGE_SIZE,
+  });
   const shown = list.gifts.filter(matches[filter]);
+  const paged = usePaged(shown, pageSize, filter);
   const total = list.gifts.length;
   const free = list.gifts.filter(matches.free).length;
   const occasion = t.createWishlist.occasions[list.occasion];
@@ -44,7 +50,7 @@ export function SharedWishlistPage({ list, standalone = false }: SharedWishlistP
   const daysLeft = list.daysLeft !== null && list.daysLeft >= 0 ? list.daysLeft : null;
 
   return (
-    <section className={cx(styles.page, standalone && styles.standalone)}>
+    <section className={cx(styles.page, standalone && styles.standalone, columns <= 1 && styles.stack)}>
       {standalone && <GuestBar />}
 
       <header className={cx('px', styles.hero)}>
@@ -96,20 +102,23 @@ export function SharedWishlistPage({ list, standalone = false }: SharedWishlistP
           </div>
 
           {shown.length > 0 ? (
-            <div className={styles.grid}>
-              {shown.map((gift) => (
-                <GiftCard
-                  key={gift.id}
-                  gift={gift}
-                  href={routes.sharedGift(list.id, gift.id)}
-                  action={
-                    <ReserveGift gift={gift} wishlistId={list.id} ownerName={list.ownerName} className={styles.give}>
-                      {text.give}
-                    </ReserveGift>
-                  }
-                />
-              ))}
-            </div>
+            <>
+              <FitGrid ready={pageSize != null} flow={columns <= 1} gridRef={gridRef} className={styles.grid}>
+                {paged.items.map((gift) => (
+                  <GiftCard
+                    key={gift.id}
+                    gift={gift}
+                    href={routes.sharedGift(list.id, gift.id)}
+                    action={
+                      <ReserveGift gift={gift} wishlistId={list.id} ownerName={list.ownerName} className={styles.give}>
+                        {text.give}
+                      </ReserveGift>
+                    }
+                  />
+                ))}
+              </FitGrid>
+              <Pagination page={paged.page} pageCount={pageSize == null ? 1 : paged.pageCount} onPage={paged.setPage} />
+            </>
           ) : (
             <p className={styles.nothing}>{text.nothing}</p>
           )}

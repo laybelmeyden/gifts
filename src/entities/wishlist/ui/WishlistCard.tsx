@@ -23,9 +23,19 @@ function shortDate(date: string) {
   return `${day}.${month}`;
 }
 
-export function WishlistCard({ list, href = routes.wishlist(list.id) }: { list: WishlistSummary; href?: string }) {
+export function WishlistCard({
+  list,
+  href = routes.wishlist(list.id),
+  detail,
+}: {
+  list: WishlistSummary;
+  href?: string;
+  /** Строка над счётчиком подарков, например имя хозяина. */
+  detail?: string;
+}) {
   const status = badge(list.daysLeft);
   const meta = [`${list.giftCount} ${ruPlural(list.giftCount, text.gifts)}`];
+  if (detail) meta.unshift(detail);
   if (list.date) meta.push(shortDate(list.date));
 
   return (

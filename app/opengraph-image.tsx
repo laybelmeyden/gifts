@@ -70,7 +70,7 @@ export default function Image() {
         />
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', flex: 1, minWidth: 0, gap: 28, marginLeft: 40 }}>
-        <div style={{ fontFamily: 'Pixel', fontSize: 120, lineHeight: 1, color: '#ffffff' }}>GIFTS</div>
+        <div style={{ fontFamily: 'Pixel', fontSize: 72, lineHeight: 1, color: '#ffffff' }}>{t.common.brand}</div>
         <div style={{ fontFamily: 'Pixel', fontSize: 44, lineHeight: 1.2, color: '#ff7ab6' }}>{t.meta.description}</div>
         <div style={{ fontFamily: 'Text', fontSize: 26, lineHeight: 1.45, color: '#b9a6e6' }}>{t.meta.lead}</div>
       </div>
